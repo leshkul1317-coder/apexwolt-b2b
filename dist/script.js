@@ -1,0 +1,10 @@
+const root = document.body;
+const menu = document.querySelector('.theme-menu');
+const openMenu = () => { menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); };
+document.querySelector('[data-theme-trigger]').addEventListener('click', openMenu);
+document.querySelector('.menu-close').addEventListener('click', () => { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); });
+document.querySelectorAll('[data-theme]').forEach(button => button.addEventListener('click', () => { root.className = `theme-${button.dataset.theme}`; localStorage.setItem('apex-b2b-theme', button.dataset.theme); menu.classList.remove('open'); window.scrollTo({top:0,behavior:'smooth'}); }));
+const saved = localStorage.getItem('apex-b2b-theme'); if(saved) root.className = `theme-${saved}`;
+document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active')); button.classList.add('active'); document.querySelectorAll('.product').forEach(product=>product.hidden = button.dataset.filter !== 'all' && !product.classList.contains(button.dataset.filter)); }));
+document.querySelectorAll('.role-list button').forEach(button=>button.addEventListener('click',()=>button.classList.toggle('expanded')));
+document.querySelector('.login').addEventListener('click',()=>alert('Демо-концепт: вход в личный кабинет будет подключён на этапе разработки B2B-платформы.'));

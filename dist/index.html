@@ -3,42 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Концепт B2B-платформы APEXWOLT для закупок и поставок." />
-  <title>APEXWOLT B2B — концепт платформы</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F7B706'/%3E%3Cpath d='M12 42 30 14h13L25 42Z' fill='%23171717'/%3E%3Cpath d='M35 42 52 22v20Z' fill='%23171717'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="APEXWOLT — B2B-каталог профессионального инструмента." />
+  <title>APEXWOLT — B2B каталог инструмента</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=typography-v2" />
+  <link rel="stylesheet" href="scroll-film.css?v=18" />
+  <link rel="stylesheet" href="catalog-enhancements.css?v=9" />
+  <link rel="stylesheet" href="footer-legal.css?v=3" />
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css" />
 </head>
-<body class="theme-yellow">
-  <div class="grain" aria-hidden="true"></div>
-  <header class="site-header"><a class="brand" href="#top" aria-label="APEXWOLT B2B"><img src="assets/apexwolt-logo.svg" alt="APEXWOLT" /></a><nav><a href="#catalog">Каталог</a><a href="#flow">Как работает</a><a href="#partners">Партнёрам</a></nav><button class="login" type="button">Войти в кабинет <span>↗</span></button></header>
-  <main id="top">
-    <section class="hero">
-      <div class="hero-copy"><p class="eyebrow">B2B · ПОСТАВКИ ПО РОССИИ</p><h1>Инструмент.<br><em>В системе.</em></h1><p class="lead">Каталог, актуальные остатки и заявки — в одной рабочей среде для поставщиков и закупщиков.</p><div class="hero-actions"><a class="button primary" href="#catalog">Открыть каталог <span>→</span></a><button class="text-button" type="button" data-theme-trigger>Сменить концепт <span>↓</span></button></div></div>
-      <div class="hero-object"><div class="measure measure-a">21V / 4.0Ah</div><div class="measure measure-b">В НАЛИЧИИ<br><b>126 шт.</b></div><img src="assets/impact-driver.webp" alt="Аккумуляторный гайковёрт APEXWOLT" /><span class="object-index">01 / 04</span></div>
-      <div class="hero-rail"><span>ПРОЗРАЧНЫЙ КАТАЛОГ</span><span>АКТУАЛЬНЫЕ ОСТАТКИ</span><span>ЗАЯВКИ БЕЗ ОПЛАТЫ ОНЛАЙН</span></div>
+<body>
+  <div class="site-film" data-scroll-film aria-hidden="true">
+    <video data-film-clip muted playsinline preload="metadata" poster="assets/video/apexwolt-film-poster.webp"><source src="assets/video/apexwolt-film-mobile.mp4" type="video/mp4" media="(max-width: 767px)" /><source src="assets/video/apexwolt-film-60fps-scrub.mp4" type="video/mp4" /></video>
+  </div>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="APEXWOLT"><img src="assets/apexwolt-logo-solid.svg" alt="APEXWOLT" /></a>
+    <nav class="nav-glass" aria-label="Основная навигация"><a class="is-active" href="#catalog">Каталог</a><a href="#platform">Платформа</a><a href="#contacts">Контакты</a></nav>
+    <div class="header-actions"><button class="header-icon" type="button" data-collection-open="favorites" aria-label="Сохранённые позиции" data-tooltip="Сохранённые позиции"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span data-favorites-count hidden>0</span></button><button class="header-icon" type="button" data-collection-open="compare" aria-label="Сравнение товаров" data-tooltip="Сравнение товаров"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v16h4M16 4h4v16h-4M12 7v10M9.5 9.5 12 7l2.5 2.5M9.5 14.5 12 17l2.5-2.5"/></svg><span data-compare-count hidden>0</span></button><a class="header-icon" href="account.html" aria-label="Личный кабинет компании" data-tooltip="Личный кабинет"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></a><button class="cart-button" type="button" data-cart-open>Заявка <span data-cart-count>0</span></button></div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow">APEXWOLT / B2B-ПЛАТФОРМА</p><h1 id="hero-title">Инструмент<br />для <em>дела.</em></h1><p>Каталог, актуальные остатки и заявки на закупку — в одном прозрачном процессе.</p><div class="hero-actions"><a class="button button-blue" href="#catalog">Открыть каталог <span>→</span></a><a class="button button-glass" href="#partner-support">Поддержка партнёров</a></div></div>
     </section>
 
-    <section class="intro"><p class="eyebrow">СИСТЕМА ДЛЯ ПАРТНЁРОВ</p><h2>Поставки без лишней<br>переписки и таблиц.</h2><div class="intro-side"><p>Поставщик обновляет ассортимент. Закупщик видит цену и остаток. Менеджер получает готовую заявку на согласование.</p><div class="stats"><b>19</b><span>ходовых позиций<br>в демо-каталоге</span><b>1</b><span>единое пространство<br>для каждой организации</span></div></div></section>
+    <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+      <p class="catalog-compact-label" id="catalog-title">Каталог</p>
+      <label class="category-search glass-panel"><span aria-hidden="true">⌕</span><input type="search" data-category-search placeholder="Найти категорию или товар" autocomplete="off" /></label>
+      <div class="category-grid" data-category-grid>
+        <a class="category-card" href="catalog.html?category=drills"><span class="category-number">01</span><span class="category-visual category-visual-drill" style="background-image:url('assets/catalog-drill-cutout.png')"></span><span class="category-name">Шуруповёрты</span><span class="category-meta">24 модели · 62 ед. в наличии</span><span class="category-arrow">→</span></a>
+        <a class="category-card" href="catalog.html?category=grinders"><span class="category-number">02</span><span class="category-visual category-visual-grinder" style="background-image:url('assets/catalog-grinder-cutout.png')"></span><span class="category-name">УШМ</span><span class="category-meta">18 моделей · 41 ед. в наличии</span><span class="category-arrow">→</span></a>
+        <a class="category-card" href="catalog.html?category=jigsaws"><span class="category-number">03</span><span class="category-visual category-visual-jigsaw" style="background-image:url('assets/catalog-jigsaw-cutout.png')"></span><span class="category-name">Электролобзики</span><span class="category-meta">12 моделей · под заказ</span><span class="category-arrow">→</span></a>
+        <a class="category-card" href="catalog.html?category=impact-wrenches"><span class="category-number">04</span><span class="category-visual" style="background-image:url('assets/category-impact-wrench-cutout-v2.png')"></span><span class="category-name">Гайковёрты</span><span class="category-meta">Аккумуляторные · платформа 21V</span><span class="category-arrow">→</span></a>
+        <a class="category-card" href="catalog.html?category=rotary-hammers"><span class="category-number">05</span><span class="category-visual" style="background-image:url('assets/category-rotary-hammer-cutout-v2.png')"></span><span class="category-name">Перфораторы</span><span class="category-meta">Аккумуляторные и сетевые</span><span class="category-arrow">→</span></a>
+        <a class="category-card" href="catalog.html?category=heat-guns"><span class="category-number">06</span><span class="category-visual" style="background-image:url('assets/category-heat-gun-cutout-v2.png')"></span><span class="category-name">Технические фены</span><span class="category-meta">Для монтажных и сервисных работ</span><span class="category-arrow">→</span></a>
+        <a class="category-card" href="catalog.html?category=batteries"><span class="category-number">07</span><span class="category-visual" style="background-image:url('assets/category-battery-cutout-v2.png')"></span><span class="category-name">Аккумуляторы</span><span class="category-meta">21V · совместимая платформа</span><span class="category-arrow">→</span></a>
+      </div>
 
-    <section class="catalog" id="catalog"><div class="section-top"><div><p class="eyebrow">КАТАЛОГ</p><h2>Всё нужное —<br>в наличии.</h2></div><div class="filters" role="tablist"><button class="active" data-filter="all">Все</button><button data-filter="battery">Аккумуляторные</button><button data-filter="network">Сетевые</button></div></div>
-      <div class="products">
-        <article class="product battery"><div class="product-image"><span>01</span><img src="assets/impact-driver.webp" alt="Гайковёрт APEXWOLT" /></div><div class="product-meta"><p>7 / 24 / 07</p><h3>Гайковёрт<br>ГА-21-500</h3><div><b>8 490 ₽</b><span>126 шт.</span></div></div></article>
-        <article class="product battery"><div class="product-image"><span>02</span><img src="assets/drill.webp" alt="Дрель-шуруповёрт APEXWOLT" /></div><div class="product-meta"><p>7 / 14 / 10</p><h3>Дрель-шуруповёрт<br>ДА-21-60</h3><div><b>5 690 ₽</b><span>84 шт.</span></div></div></article>
-        <article class="product battery"><div class="product-image"><span>03</span><img src="assets/grinder.webp" alt="УШМ APEXWOLT" /></div><div class="product-meta"><p>7 / 12 / 13</p><h3>УШМ аккумуляторная<br>125 мм</h3><div><b>7 990 ₽</b><span>47 шт.</span></div></div></article>
-        <article class="product network"><div class="product-image"><span>04</span><img src="assets/jigsaw.webp" alt="Лобзик APEXWOLT" /></div><div class="product-meta"><p>7 / 09 / 02</p><h3>Лобзик электрический<br>Л-600</h3><div><b>3 290 ₽</b><span>63 шт.</span></div></div></article>
-      </div><a class="catalog-link" href="#flow">Смотреть весь ассортимент <span>→</span></a>
+      <div class="catalog-browser" data-catalog-browser hidden>
+        <div class="catalog-topline"><button class="back-button" type="button" data-catalog-back>← Все категории</button><p data-category-title>Шуруповёрты <span>· 1 позиция</span></p></div>
+        <div class="catalog-tools glass-panel"><label class="search-field"><span>⌕</span><input type="search" data-product-search placeholder="Поиск по названию или артикулу" /></label><div class="tool-chips" aria-label="Быстрые B2B-фильтры"><button class="tool-chip is-active" type="button" data-availability="all">Все позиции</button><button class="tool-chip" type="button" data-availability="stock">В наличии</button><button class="tool-chip" type="button" data-availability="fast">Отгрузка 1–3 дня</button></div><label class="sort-field">Сортировка <select data-product-sort><option value="relevant">Актуальные остатки</option><option value="lead">По сроку поставки</option><option value="price-low">Цена: по возрастанию</option><option value="price-high">Цена: по убыванию</option></select></label></div>
+        <div class="products" data-products>
+          <article class="product-card" data-category="drills" data-stock="62" data-lead="1" data-price="6490" data-search="шуруповерт дрель акб 21v да-21-60"><div class="product-art"><img src="assets/catalog-drill-cutout.png" alt="Аккумуляторная дрель-шуруповёрт APEXWOLT" /></div><div class="product-content"><p>Артикул: ДА-21-60 · 21V</p><h3>Дрель-шуруповёрт<br />аккумуляторная</h3><div class="product-footer"><span>В наличии: 62 шт.</span><button type="button" data-add-product="Дрель-шуруповёрт 21V">В заявку <b>→</b></button></div></div></article>
+          <article class="product-card" data-category="grinders" data-stock="41" data-lead="3" data-price="8490" data-search="ушм болгарка аккумуляторная 21v ушм-21-125"><div class="product-art"><img src="assets/catalog-grinder-cutout.png" alt="Аккумуляторная УШМ APEXWOLT" /></div><div class="product-content"><p>Артикул: УШМ-21-125 · 21V</p><h3>УШМ<br />аккумуляторная</h3><div class="product-footer"><span>В наличии: 41 шт.</span><button type="button" data-add-product="УШМ аккумуляторная 21V">В заявку <b>→</b></button></div></div></article>
+          <article class="product-card" data-category="jigsaws" data-stock="0" data-lead="7" data-price="3290" data-search="лобзик электрический 600w л-600"><div class="product-art"><img src="assets/catalog-jigsaw-cutout.png" alt="Электролобзик APEXWOLT" /></div><div class="product-content"><p>Артикул: Л-600 · 220V</p><h3>Лобзик<br />электрический</h3><div class="product-footer"><span>Под заказ: 7 дней</span><button type="button" data-add-product="Лобзик электрический">В заявку <b>→</b></button></div></div></article>
+        </div>
+        <p class="empty-state" data-empty-state hidden>По заданным условиям ничего не найдено.</p>
+      </div>
     </section>
 
-    <section class="system"><div class="system-image"><img src="assets/tool-line.webp" alt="Линейка инструментов APEXWOLT" /></div><div class="system-copy"><p class="eyebrow">СИСТЕМА АКБ 21V</p><h2>Одна платформа.<br>Больше решений.</h2><p>Совместимые аккумуляторы, понятные характеристики и готовая комплектация в каждой карточке товара.</p><ul><li>Единый стандарт аккумуляторов</li><li>Характеристики и документы в карточке</li><li>Остатки видны до создания заявки</li></ul></div></section>
+    <section class="service-intro" aria-label="Сервис APEXWOLT"><div class="service-note service-note-left"><p class="hero-caption"><i></i> 21V PLATFORM · PROFESSIONAL SERIES</p><article><span>→</span><b>Единая платформа</b><p>Инструмент, оснастка и комплектующие в одном контуре закупки.</p></article><article><span>→</span><b>Актуальные данные</b><p>Остатки, сроки и условия видны до отправки заявки.</p></article></div><div class="service-focus" aria-hidden="true"></div><div class="service-note service-note-right"><article><span>→</span><b>Проверенная комплектация</b><p>Подбираем совместимые решения под вашу задачу.</p></article><article><span>→</span><b>Поддержка поставки</b><p>Менеджер подтверждает состав, документы и дату отгрузки.</p></article></div></section>
 
-    <section class="flow" id="flow"><p class="eyebrow">КАК РАБОТАЕТ ЗАЯВКА</p><div class="flow-grid"><article><b>01</b><h3>Выберите<br>товары</h3><p>Добавьте позиции и нужное количество в заявку.</p></article><article><b>02</b><h3>Отправьте<br>на согласование</h3><p>Менеджер получает состав заказа и данные организации.</p></article><article><b>03</b><h3>Получите<br>подтверждение</h3><p>Статус, сроки и документы сохраняются в кабинете.</p></article></div></section>
+    <section class="partner-support" id="partner-support" aria-labelledby="partner-support-title">
+      <div class="partner-support-heading">
+        <div><p class="eyebrow"><span>01</span> ПОДДЕРЖКА ПАРТНЁРОВ</p><h2 id="partner-support-title">Вкладываемся<br />в продажи <em>вместе.</em></h2></div>
+        <p>Помогаем не только заказать товар, но и представить его покупателю, обучить команду и поддерживать продажи после первой поставки.</p>
+      </div>
+      <div class="partner-support-grid">
+        <article class="partner-benefit partner-benefit-production">
+          <div class="partner-benefit-top"><span>01 / ПРОИЗВОДСТВО</span><i>Китай</i></div>
+          <h3>Подтверждаем происхождение продукции</h3>
+          <p>Показываем производственную базу и этапы выпуска: предоставляем фото- и видеоматериалы с реальных производственных площадок.</p>
+          <div class="factory-placeholders" aria-label="Будущие фотографии производства">
+            <button class="factory-placeholder active" type="button" aria-pressed="true"><img src="assets/factory-overview.webp" alt="Производственный комплекс APEXWOLT" /><span>01</span><b>Общий план производства</b><small>Масштаб и оснащение площадки</small></button>
+            <button class="factory-placeholder" type="button" aria-pressed="false"><img src="assets/factory-line.webp" alt="Сборочная линия производства инструмента" /><span>02</span><b>Сборочная линия</b><small>Ключевые этапы выпуска инструмента</small></button>
+            <button class="factory-placeholder" type="button" aria-pressed="false"><img src="assets/factory-quality.webp" alt="Контроль качества готовой продукции" /><span>03</span><b>Контроль качества</b><small>Проверка готовой продукции</small></button>
+          </div>
+        </article>
+      </div>
+      <div class="partner-support-strip" aria-label="Дополнительная поддержка партнёров">
+        <article class="is-accent"><span>02 / БЕСПЛАТНО</span><div><b>Продукция для стенда</b><p>APEXWOLT предоставляет согласованный комплект для демонстрационной выкладки.</p></div></article>
+        <article><span>03</span><div><b>Закреплённый менеджер</b><p>Один контакт по ассортименту, заявкам, документам и поставкам.</p></div></article>
+        <article><span>04</span><div><b>POS-материалы</b><p>Карточки товара, ценники, каталоги и макеты для точки продаж.</p></div></article>
+        <article><span>05</span><div><b>Мотивация команды</b><p>Отдельная бонусная программа для менеджеров партнёра.</p></div></article>
+      </div>
+    </section>
 
-    <section class="partners" id="partners"><div><p class="eyebrow">ДЛЯ КАЖДОЙ РОЛИ</p><h2>Одна платформа.<br>Разные права.</h2></div><div class="role-list"><button><span>01</span> Поставщик <i>+</i><small>Управляет своими товарами, остатками и импортом Excel.</small></button><button><span>02</span> Закупщик <i>+</i><small>Собирает заявки и видит историю закупок организации.</small></button><button><span>03</span> Менеджер <i>+</i><small>Проверяет заявки, каталог и помогает партнёрам.</small></button><button><span>04</span> Администратор <i>+</i><small>Управляет организациями, доступами и интеграциями.</small></button></div></section>
+    <section class="b2b-tools" id="platform"><div class="section-heading section-copy-glass section-title-lockup"><div><p class="eyebrow"><span>02</span> ИНСТРУМЕНТЫ ЗАКУПЩИКА</p><h2>Рабочее место,<br /><em>не витрина.</em></h2></div><p>Все важные действия собраны так, чтобы закупка не зависела от переписки и ручной сверки.</p></div><div class="procurement-grid"><article class="procurement-card is-blue"><span>01</span><b>Быстрый заказ</b><p>Внесите артикулы списком или загрузите Excel-файл. Система соберёт черновик заявки.</p><button type="button" data-demo-action="Быстрый заказ">Добавить по артикулам <i>→</i></button></article><article class="procurement-card"><span>02</span><b>Повтор закупки</b><p>Сохранённые списки и история заказов — чтобы повторить регулярную поставку в два клика.</p><button type="button" data-demo-action="История закупок">Открыть историю <i>→</i></button></article><article class="procurement-card"><span>03</span><b>Мой прайс</b><p>Персональные цены, договорные условия и доступный кредитный лимит для вашей организации.</p><button type="button" data-demo-action="Персональный прайс">Посмотреть условия <i>→</i></button></article></div></section>
 
-    <section class="contact"><p class="eyebrow">НАЧАТЬ РАБОТУ</p><h2>Соберём поставку<br>под вашу задачу.</h2><a class="button primary" href="mailto:idea.apexwolt@mail.ru">Связаться с менеджером <span>→</span></a><p class="contact-details">idea.apexwolt@mail.ru &nbsp;·&nbsp; +7 (933) 023-88-43</p></section>
+    <section class="video-reviews" id="video-reviews" aria-labelledby="video-reviews-title">
+      <div class="video-reviews-heading"><div><p class="eyebrow"><span>03</span> ВИДЕООБЗОРЫ</p><h2 id="video-reviews-title">Инструмент —<br /><em>в реальной работе.</em></h2></div><p>Короткие обзоры, тесты и инструкции помогают оценить инструмент до формирования заявки.</p></div>
+      <div class="video-showcase">
+        <button class="video-featured" type="button" data-video-placeholder="Обзор платформы APEXWOLT 21V">
+          <img src="assets/video/apexwolt-film-poster.webp" alt="Превью обзора платформы APEXWOLT 21V" />
+          <span class="video-shade" aria-hidden="true"></span>
+          <span class="video-featured-copy"><i class="video-play">▶</i><small>ГЛАВНЫЙ ОБЗОР · 08:24</small><b>Платформа APEXWOLT 21V:<br />инструмент и комплектация</b></span>
+        </button>
+        <div class="video-review-list">
+          <button type="button" data-video-placeholder="Тест аккумуляторного шуруповёрта"><span class="video-review-thumb"><img src="assets/catalog-drill-cutout.png" alt="" /><i>▶</i></span><span><small>ТЕСТ · 06:12</small><b>Аккумуляторный шуруповёрт</b><em>Нагрузка, эргономика и автономность</em></span></button>
+          <button type="button" data-video-placeholder="Обзор аккумуляторной УШМ"><span class="video-review-thumb"><img src="assets/catalog-grinder-cutout.png" alt="" /><i>▶</i></span><span><small>ОБЗОР · 05:48</small><b>Аккумуляторная УШМ</b><em>Комплектация и работа под нагрузкой</em></span></button>
+          <button type="button" data-video-placeholder="Инструкция по подбору комплекта"><span class="video-review-thumb"><img src="assets/catalog-jigsaw-cutout.png" alt="" /><i>▶</i></span><span><small>ИНСТРУКЦИЯ · 04:10</small><b>Как подобрать комплект</b><em>Инструмент, АКБ и совместимая оснастка</em></span></button>
+        </div>
+      </div>
+      <div class="video-platforms"><span>Все материалы</span><button type="button" data-video-platform="YouTube">YouTube ↗</button><button type="button" data-video-platform="VK Видео">VK Видео ↗</button><button type="button" data-video-platform="Rutube">Rutube ↗</button></div>
+    </section>
+
+    <section class="account-section" id="account"><div class="account-copy"><p class="eyebrow">ЛИЧНЫЙ КАБИНЕТ КОМПАНИИ</p><h2>Роли —<br />по <em>задачам.</em></h2><p>Закупщик собирает заказ, руководитель согласует лимит, бухгалтер получает документы. В одной организации — разные уровни доступа.</p><a class="button button-blue" href="account.html">Открыть кабинет <span>→</span></a></div><div class="account-panel glass-panel"><div class="account-panel-head"><span>APEXWOLT / COMPANY</span><i>Активно</i></div><div class="account-roles"><article><b>Закупщик</b><small>Заявки и повтор заказов</small><span>Каталог · заказы</span></article><article><b>Руководитель</b><small>Согласование и лимиты</small><span>Заявки · аналитика</span></article><article><b>Бухгалтер</b><small>Документы и взаиморасчёты</small><span>Счета · УПД</span></article></div></div></section>
+    <section class="contact" id="contacts"><p class="eyebrow">НАЧАТЬ РАБОТУ</p><h2>Соберите<br />свою <em>заявку.</em></h2><a class="button button-dark" href="#catalog">Перейти в каталог <span>→</span></a></section>
   </main>
-  <footer><img src="assets/apexwolt-logo.svg" alt="APEXWOLT" /><span>Концепт B2B-платформы · 2026</span><a href="https://apexwolt.ru/">B2C-сайт</a></footer>
-  <div class="theme-menu" aria-hidden="true"><div><p class="eyebrow">4 ВИЗУАЛЬНЫЕ КОНЦЕПТА</p><button data-theme="yellow"><b>01</b> Жёлтый объект</button><button data-theme="black"><b>02</b> Чёрная галерея</button><button data-theme="glass-sun"><b>03</b> Liquid glass / Yellow</button><button data-theme="glass-night"><b>04</b> Liquid glass / Black</button><button class="menu-close">Закрыть</button></div></div>
-  <script src="script.js"></script>
+
+  <div data-site-footer></div>
+
+  <aside class="request-drawer" data-cart-drawer aria-label="Заявка" aria-hidden="true"><button class="drawer-close" type="button" data-cart-close aria-label="Закрыть">×</button><p class="eyebrow">ЗАЯВКА НА ЗАКУПКУ</p><h2>Ваш список</h2><div class="request-items" data-request-items><p>Добавьте позиции из каталога.</p></div><div class="drawer-bottom"><button class="button button-dark" type="button" data-send-request>Отправить заявку <span>→</span></button><small>Отправка заявки не заключает договор. Цены, наличие и сроки подтвердит менеджер. <a href="request-terms.html">Условия оформления заявки</a>.</small></div><section class="checkout-success" data-checkout-success hidden><p class="eyebrow">ЗАЯВКА ПРИНЯТА</p><div class="checkout-film"><video data-checkout-film muted playsinline preload="none" poster="assets/video/apexwolt-film-poster.webp"><source src="assets/video/apexwolt-film-mobile.mp4" type="video/mp4" media="(max-width: 767px)" /><source src="assets/video/apexwolt-film-60fps-scrub.mp4" type="video/mp4" /></video></div><h2>Комплект<br />собирается.</h2><p>Менеджер подтвердит состав, сроки и документы. После подтверждения заказ будет передан в отгрузку.</p><button class="button button-blue" type="button" data-checkout-reset>Вернуться к заявке <span>→</span></button></section></aside><div class="drawer-backdrop" data-cart-close></div><div class="toast" data-toast role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
+  <aside class="collection-drawer" data-collection-drawer aria-hidden="true"><button class="drawer-close" type="button" data-collection-close aria-label="Закрыть">×</button><p class="eyebrow" data-collection-eyebrow>СОХРАНЁННЫЕ ПОЗИЦИИ</p><h2 data-collection-title>Ваши списки</h2><div class="collection-items" data-collection-items></div></aside><div class="collection-backdrop" data-collection-close></div>
+  <script src="script.js?v=cinematic-scroll-v18"></script>
+  <script src="collections.js?v=1"></script>
+  <script src="footer.js?v=6"></script>
 </body>
 </html>

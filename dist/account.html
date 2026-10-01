@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Личный кабинет компании на B2B-платформе APEXWOLT." />
+  <title>Личный кабинет — APEXWOLT</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=typography-v2" />
+  <link rel="stylesheet" href="account.css?v=4" />
+</head>
+<body class="account-page">
+  <svg class="account-icon-sprite" aria-hidden="true">
+    <symbol id="account-icon-overview" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="account-icon-building" viewBox="0 0 24 24"><path d="M4 21V6.5L12 3l8 3.5V21M8 9h1M8 13h1M8 17h1M15 9h1M15 13h1M15 17h1M3 21h18"/></symbol>
+    <symbol id="account-icon-request" viewBox="0 0 24 24"><path d="M6 3h12v18H6Z"/><path d="M9 8h6M9 12h6M9 16h3"/><path d="m14 16 1.5 1.5L19 14"/></symbol>
+    <symbol id="account-icon-box" viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4Z"/><path d="M4 7v10l8 4 8-4V7M12 11v10"/></symbol>
+    <symbol id="account-icon-finance" viewBox="0 0 24 24"><path d="M5 3h14v18l-2-1.5L15 21l-3-1.5L9 21l-2-1.5L5 21Z"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="account-icon-location" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="account-icon-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c.4-4 2.2-6 5.5-6s5.1 2 5.5 6M16 5.5a3 3 0 0 1 0 5.8M17 14c2.2.6 3.4 2.5 3.5 5"/></symbol>
+    <symbol id="account-icon-contract" viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6Z"/><path d="M15 3v4h4M9 11h6M9 15h4M9 19h3"/></symbol>
+    <symbol id="account-icon-message" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="account-icon-service" viewBox="0 0 24 24"><path d="M12 3 19 6v5.5c0 4.2-2.7 7.6-7 9.5-4.3-1.9-7-5.3-7-9.5V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></symbol>
+    <symbol id="account-icon-repair" viewBox="0 0 24 24"><path d="m14.5 6.5 3-3a4 4 0 0 1-5 5L6 15l3 3 6.5-6.5a4 4 0 0 1 5-5l-3 3"/><path d="m4 17 3 3"/></symbol>
+    <symbol id="account-icon-book" viewBox="0 0 24 24"><path d="M4 5.5c3-1.5 5.7-1.2 8 .8v14c-2.3-2-5-2.3-8-.8ZM20 5.5c-3-1.5-5.7-1.2-8 .8v14c2.3-2 5-2.3 8-.8Z"/></symbol>
+    <symbol id="account-icon-catalog" viewBox="0 0 24 24"><path d="M5 4h14v16H5Z"/><path d="M9 4v16M12 8h4M12 12h4M12 16h3"/></symbol>
+    <symbol id="account-icon-media" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m5 18 5-5 3 3 2-2 4 4"/></symbol>
+    <symbol id="account-icon-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
+    <symbol id="account-icon-export" viewBox="0 0 24 24"><path d="M5 3h9l3 3v15H5Z"/><path d="M14 3v4h4M9 13h7M13 10l3 3-3 3"/></symbol>
+    <symbol id="account-icon-nodes" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="m8.7 10.7 6.6-3.4M8.7 13.3l6.6 3.4"/></symbol>
+    <symbol id="account-icon-api" viewBox="0 0 24 24"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M14 3l-4 18"/></symbol>
+    <symbol id="account-icon-manager" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6M17 9.5h3v5h-3M20 14.5c0 2-1.2 3-3.5 3"/></symbol>
+  </svg>
+  <header class="account-header">
+    <a class="brand" href="index.html" aria-label="APEXWOLT — на главную"><img src="assets/apexwolt-logo-solid.svg" alt="APEXWOLT" /></a>
+    <div class="account-header-center"><span>Кабинет компании</span><i>Демо-режим</i></div>
+    <div class="account-header-actions"><a href="catalog.html?category=drills">Каталог</a><button type="button" data-demo-action="Уведомления">○</button><button class="account-avatar" type="button" aria-label="Профиль компании">АК</button></div>
+  </header>
+
+  <main class="account-layout">
+    <aside class="account-sidebar">
+      <button class="company-switcher" type="button" data-account-section="organization"><span>Организация</span><b>ООО «Компания»</b><small>Подключение не завершено</small><i>→</i></button>
+      <nav class="account-nav" aria-label="Разделы личного кабинета">
+        <button class="is-active" type="button" data-account-section="overview"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-overview" /></svg></span>Обзор</button>
+        <button type="button" data-account-section="organization"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-building" /></svg></span>Моя организация</button>
+        <button type="button" data-account-section="requests"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-request" /></svg></span>Заявки <i data-sidebar-draft-count>0</i></button>
+        <button type="button" data-account-section="orders"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-box" /></svg></span>Заказы</button>
+        <button type="button" data-account-section="finance"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-finance" /></svg></span>Финансы и документы</button>
+        <button type="button" data-account-section="service"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-service" /></svg></span>Сервис</button>
+        <button type="button" data-account-section="materials"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-catalog" /></svg></span>Материалы</button>
+        <button type="button" data-account-section="integrations"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-nodes" /></svg></span>Интеграции</button>
+      </nav>
+      <div class="sidebar-manager"><span>Ваш менеджер</span><b>Будет назначен после подключения компании</b><button type="button" data-demo-action="Связь с менеджером">Задать вопрос →</button></div>
+    </aside>
+
+    <section class="account-workspace">
+      <header class="workspace-header"><div><p>APEXWOLT / B2B</p><h1 data-section-title>Обзор</h1></div><a class="account-primary" href="catalog.html?category=drills">Новая заявка <span>→</span></a></header>
+
+      <section class="account-panel is-active" data-account-panel="overview">
+        <article class="overview-hero">
+          <div><p>ДОБРО ПОЖАЛОВАТЬ</p><h2>Все закупки —<br />в одном <em>контуре.</em></h2><span>Подключите организацию, чтобы открыть персональные цены, документы и историю поставок.</span></div>
+          <button type="button" data-account-section="organization">Подключить организацию <i>→</i></button>
+        </article>
+        <div class="account-metrics">
+          <article><span>Черновик заявки</span><b data-overview-draft-count>0</b><small>позиций сохранено</small></article>
+          <article><span>Активные заказы</span><b>0</b><small>нет заказов в работе</small></article>
+          <article><span>Ожидают оплаты</span><b>0 ₽</b><small>счета отсутствуют</small></article>
+          <article><span>Новые документы</span><b>0</b><small>всё просмотрено</small></article>
+        </div>
+        <div class="overview-grid">
+          <article class="draft-widget">
+            <div class="widget-head"><div><p>ТЕКУЩАЯ ЗАЯВКА</p><h3>Черновик закупки</h3></div><a href="catalog.html?category=drills">Добавить товары →</a></div>
+            <div class="draft-list" data-draft-items><p>Пока пусто. Добавьте позиции из каталога.</p></div>
+            <div class="widget-footer"><span>Итоговые цены и сроки подтвердит менеджер.</span><button type="button" data-account-section="requests">Открыть заявку</button></div>
+          </article>
+          <article class="manager-widget">
+            <span class="manager-status">МЕНЕДЖЕР APEXWOLT</span><div class="manager-avatar"><svg aria-hidden="true"><use href="#account-icon-manager" /></svg></div><h3>Персональное сопровождение</h3><p>После проверки реквизитов здесь появятся имя, телефон и прямой канал связи с вашим менеджером.</p><button type="button" data-demo-action="Подключение компании">Подключить компанию →</button>
+          </article>
+        </div>
+        <article class="activity-widget"><div class="widget-head"><div><p>ПОСЛЕДНИЕ СОБЫТИЯ</p><h3>История работы</h3></div><button type="button" data-demo-action="Фильтр истории">Фильтр</button></div><div class="empty-account-state"><span>○</span><b>Событий пока нет</b><p>Заявки, счета, статусы отгрузки и документы будут собраны здесь.</p></div></article>
+      </section>
+
+      <section class="account-panel" data-account-panel="organization">
+        <div class="panel-intro"><div><p>02 / МОЯ ОРГАНИЗАЦИЯ</p><h2>Реквизиты и<br /><em>команда.</em></h2></div><p>Организация связывает персональные цены, торговые точки, сотрудников и документы в одном кабинете.</p></div>
+        <div class="organization-grid">
+          <article class="organization-card is-main"><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-building" /></svg></span><span>СТАТУС ПОДКЛЮЧЕНИЯ</span><h3>Добавьте реквизиты компании</h3><p>Введите ИНН — основные данные организации будут заполнены автоматически после подключения сервиса проверки.</p><label>ИНН организации<input type="text" inputmode="numeric" placeholder="10 или 12 цифр" /></label><button type="button" data-demo-action="Проверка ИНН">Найти организацию →</button></article>
+          <article class="organization-card"><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-location" /></svg></span><span>ТОРГОВЫЕ ТОЧКИ</span><b>0</b><p>Адреса поставки и ответственные получатели.</p><button type="button" data-demo-action="Добавление торговой точки">Добавить точку</button></article>
+          <article class="organization-card"><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-users" /></svg></span><span>СОТРУДНИКИ И РОЛИ</span><b>1</b><p>Закупщик, руководитель и бухгалтер с разными правами.</p><button type="button" data-demo-action="Управление сотрудниками">Настроить роли</button></article>
+          <article class="organization-card"><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-contract" /></svg></span><span>ДОГОВОРНЫЕ УСЛОВИЯ</span><b>—</b><p>Персональный прайс, лимиты и условия оплаты появятся после проверки.</p><button type="button" data-demo-action="Договорные условия">Подробнее</button></article>
+        </div>
+      </section>
+
+      <section class="account-panel" data-account-panel="requests">
+        <div class="panel-intro"><div><p>03 / ЗАЯВКИ</p><h2>От черновика<br />до <em>счёта.</em></h2></div><p>Соберите позиции вручную или загрузите список артикулов. Менеджер проверит цены, наличие и сроки поставки.</p></div>
+        <div class="request-board"><article class="request-draft-card"><div class="widget-head"><div><p>ЧЕРНОВИК</p><h3>Текущая заявка</h3></div><span data-request-draft-count>0 позиций</span></div><div class="draft-list" data-request-items><p>Позиции ещё не добавлены.</p></div><div class="request-actions"><a href="catalog.html?category=drills">Добавить из каталога</a><button type="button" data-demo-action="Загрузка Excel">Загрузить Excel</button><button class="is-primary" type="button" data-demo-action="Отправка заявки менеджеру">Отправить менеджеру →</button></div></article><aside class="request-steps"><span>ПРОЦЕСС ЗАЯВКИ</span><ol><li class="is-current"><b>01</b><p>Черновик<small>Товары и количество</small></p></li><li><b>02</b><p>Проверка<small>Цены, остатки и сроки</small></p></li><li><b>03</b><p>Согласование<small>Счёт и доставка</small></p></li><li><b>04</b><p>Заказ<small>Оплата и отгрузка</small></p></li></ol></aside></div>
+      </section>
+
+      <section class="account-panel" data-account-panel="orders">
+        <div class="panel-intro"><div><p>04 / ЗАКАЗЫ</p><h2>Поставка<br /><em>под контролем.</em></h2></div><p>Статусы, состав заказа, сроки сборки и отгрузочные данные без ручной сверки в переписке.</p></div>
+        <div class="account-tabs"><button class="is-active" type="button">Все заказы</button><button type="button">В работе</button><button type="button">Завершённые</button></div><div class="empty-account-state is-large"><span>○</span><b>Заказов пока нет</b><p>После подтверждения менеджером заявка превратится в заказ и появится здесь.</p><a href="catalog.html?category=drills">Перейти в каталог →</a></div>
+      </section>
+
+      <section class="account-panel" data-account-panel="finance">
+        <div class="panel-intro"><div><p>05 / ФИНАНСЫ И ДОКУМЕНТЫ</p><h2>Счета, УПД<br />и <em>оплаты.</em></h2></div><p>Оплата производится банковским переводом по выставленному счёту. Онлайн-эквайринг не используется.</p></div>
+        <div class="finance-summary"><article><span>К оплате</span><b>0 ₽</b><small>нет активных счетов</small></article><article><span>Просрочено</span><b>0 ₽</b><small>задолженность отсутствует</small></article><article><span>Документы</span><b>0</b><small>счетов и накладных</small></article></div><div class="account-tabs"><button class="is-active" type="button">Счета</button><button type="button">Накладные и УПД</button><button type="button">Акты сверки</button></div><div class="empty-account-state is-large"><span>□</span><b>Документы появятся после первого заказа</b><p>Их можно будет просматривать, скачивать и передавать бухгалтеру.</p></div>
+      </section>
+
+      <section class="account-panel" data-account-panel="service">
+        <div class="panel-intro"><div><p>06 / СЕРВИС</p><h2>Поддержка<br />после <em>поставки.</em></h2></div><p>Гарантийные обращения, ремонт, возвраты и история коммуникации с сервисной командой.</p></div>
+        <div class="service-actions"><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-message" /></svg></span><span>01</span><h3>Новое обращение</h3><p>Укажите заказ, товар и суть вопроса. Менеджер подключит нужного специалиста.</p><button type="button" data-demo-action="Новое сервисное обращение">Создать обращение →</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-repair" /></svg></span><span>02</span><h3>Статусы ремонта</h3><p>Диагностика, согласование, ремонт и готовность к выдаче в одном списке.</p><button type="button" data-demo-action="Статусы ремонта">Посмотреть статусы →</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-book" /></svg></span><span>03</span><h3>База знаний</h3><p>Инструкции, ответы на частые вопросы и рекомендации по эксплуатации.</p><button type="button" data-demo-action="База знаний">Открыть материалы →</button></article></div>
+      </section>
+
+      <section class="account-panel" data-account-panel="materials">
+        <div class="panel-intro"><div><p>07 / МАТЕРИАЛЫ</p><h2>Всё для<br /><em>продаж.</em></h2></div><p>Каталоги, фотографии, видео, карточки товаров и макеты для торговых точек партнёра.</p></div>
+        <div class="materials-grid"><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-catalog" /></svg></span><span>PDF</span><h3>Каталог продукции</h3><p>Актуальная линейка и основные характеристики.</p><button type="button" data-demo-action="Каталог продукции">Скачать</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-media" /></svg></span><span>ZIP</span><h3>Фото и карточки</h3><p>Материалы для сайта, маркетплейсов и социальных сетей.</p><button type="button" data-demo-action="Фото и карточки">Открыть</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-layout" /></svg></span><span>POS</span><h3>Макеты для точки</h3><p>Ценники, плакаты и материалы для демонстрационного стенда.</p><button type="button" data-demo-action="POS-материалы">Запросить</button></article></div>
+      </section>
+
+      <section class="account-panel" data-account-panel="integrations">
+        <div class="panel-intro"><div><p>08 / ИНТЕГРАЦИИ</p><h2>Данные без<br /><em>ручного переноса.</em></h2></div><p>Начнём с файловых выгрузок, затем подключим 1С, ERP и REST API для крупных партнёров.</p></div>
+        <div class="integration-list"><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-export" /></svg></span><div><span>XLSX / CSV</span><h3>Прайс-листы и остатки</h3><p>Выгрузка ассортимента, цен и доступности товаров.</p></div><button type="button" data-demo-action="Файловые выгрузки">Настроить</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-nodes" /></svg></span><div><span>1С / ERP</span><h3>Учётная система</h3><p>Заказы, статусы и документы после согласования формата обмена.</p></div><button type="button" data-demo-action="Интеграция с 1С">Оставить заявку</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-api" /></svg></span><div><span>REST API</span><h3>API для партнёров</h3><p>Токены, документация, вебхуки и журнал синхронизации.</p></div><button type="button" data-demo-action="REST API">Запросить доступ</button></article></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="account-toast" data-account-toast role="status"></div>
+  <script src="account.js?v=1"></script>
+</body>
+</html>

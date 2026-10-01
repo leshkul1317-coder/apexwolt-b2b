@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Каталог профессионального инструмента APEXWOLT для корпоративных закупок." />
+  <title>Каталог APEXWOLT</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=typography-v2" />
+  <link rel="stylesheet" href="scroll-film.css?v=17" />
+  <link rel="stylesheet" href="catalog-page.css?v=3" />
+  <link rel="stylesheet" href="footer-legal.css?v=3" />
+</head>
+<body class="catalog-page">
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="APEXWOLT — на главную"><img src="assets/apexwolt-logo-solid.svg" alt="APEXWOLT" /></a>
+    <nav class="nav-glass" aria-label="Основная навигация"><a class="is-active" href="index.html#catalog">Каталог</a><a href="index.html#platform">Платформа</a><a href="index.html#contacts">Контакты</a></nav>
+    <div class="header-actions"><button class="header-icon" type="button" data-collection-open="favorites" aria-label="Сохранённые позиции" data-tooltip="Сохранённые позиции"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span data-favorites-count hidden>0</span></button><button class="header-icon" type="button" data-collection-open="compare" aria-label="Сравнение товаров" data-tooltip="Сравнение товаров"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v16h4M16 4h4v16h-4M12 7v10M9.5 9.5 12 7l2.5 2.5M9.5 14.5 12 17l2.5-2.5"/></svg><span data-compare-count hidden>0</span></button><a class="header-icon" href="account.html" aria-label="Личный кабинет компании" data-tooltip="Личный кабинет"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></a><button class="cart-button" type="button" data-cart-open>Заявка <span data-cart-count>0</span></button></div>
+  </header>
+
+  <main class="category-main">
+    <section class="category-hero"><a class="category-return" href="index.html#catalog">Все категории</a><div class="category-hero-copy"><div><p class="eyebrow">КАТАЛОГ APEXWOLT / B2B</p><h1 data-page-title>Шуруповёрты</h1></div><p data-page-description>Профессиональный аккумуляторный инструмент для регулярных корпоративных закупок.</p></div><nav class="category-switcher" aria-label="Категории"><a href="catalog.html?category=drills" data-category-tab="drills">Шуруповёрты</a><a href="catalog.html?category=grinders" data-category-tab="grinders">УШМ</a><a href="catalog.html?category=jigsaws" data-category-tab="jigsaws">Электролобзики</a><a href="catalog.html?category=impact-wrenches" data-category-tab="impact-wrenches">Гайковёрты</a><a href="catalog.html?category=rotary-hammers" data-category-tab="rotary-hammers">Перфораторы</a><a href="catalog.html?category=heat-guns" data-category-tab="heat-guns">Технические фены</a><a href="catalog.html?category=batteries" data-category-tab="batteries">Аккумуляторы</a></nav></section>
+
+    <section class="category-results" aria-label="Товары категории">
+      <div class="catalog-tools glass-panel"><label class="search-field"><span>⌕</span><input type="search" data-product-search placeholder="Поиск по названию или артикулу" /></label><div class="tool-chips" aria-label="Быстрые B2B-фильтры"><button class="tool-chip is-active" type="button" data-availability="all">Все позиции</button><button class="tool-chip" type="button" data-availability="stock">В наличии</button><button class="tool-chip" type="button" data-availability="fast">Отгрузка 1–3 дня</button></div><label class="sort-field">Сортировка <select data-product-sort><option value="relevant">Актуальные остатки</option><option value="lead">По сроку поставки</option><option value="price-low">Цена: по возрастанию</option><option value="price-high">Цена: по убыванию</option></select></label><div class="view-switcher" aria-label="Вид каталога"><button class="is-active" type="button" data-catalog-view="list" aria-label="Список">☰ <span>Список</span></button><button type="button" data-catalog-view="grid" aria-label="Плитка">▦ <span>Плитка</span></button></div></div>
+      <div class="category-results-head"><p><span data-results-count>0</span> позиций</p><button class="price-access-note" type="button" data-auth-gate><span>Персональные условия скрыты</span><b>Откроются после авторизации</b></button></div>
+      <div class="products view-list" data-products></div>
+      <p class="empty-state" data-empty-state hidden>По заданным условиям ничего не найдено.</p>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+
+  <aside class="request-drawer" data-cart-drawer aria-label="Заявка" aria-hidden="true"><button class="drawer-close" type="button" data-cart-close aria-label="Закрыть">×</button><p class="eyebrow">ЗАЯВКА НА ЗАКУПКУ</p><h2>Ваш список</h2><div class="request-items" data-request-items></div><div class="drawer-bottom"><a class="button button-blue" href="account.html#requests">Перейти к оформлению <span>→</span></a><small>Состав заявки сохранится в кабинете. Итоговые условия подтвердит менеджер. <a href="request-terms.html">Подробнее</a>.</small></div></aside><div class="drawer-backdrop" data-cart-close></div>
+  <aside class="collection-drawer" data-collection-drawer aria-hidden="true"><button class="drawer-close" type="button" data-collection-close aria-label="Закрыть">×</button><p class="eyebrow" data-collection-eyebrow>СОХРАНЁННЫЕ ПОЗИЦИИ</p><h2 data-collection-title>Ваши списки</h2><div class="collection-items" data-collection-items></div></aside><div class="collection-backdrop" data-collection-close></div>
+  <div class="toast" data-toast role="status"></div>
+  <script src="catalog.js?v=4"></script>
+  <script src="collections.js?v=1"></script>
+  <script src="footer.js?v=4"></script>
+</body>
+</html>

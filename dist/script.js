@@ -5,10 +5,10 @@ const sectionFilmStops = [
   { selector: '#catalog', time: 3.08 },
   { selector: '.service-intro', time: 6.16 },
   { selector: '.partner-support', time: 9.20 },
-  { selector: '#platform', time: 12.24 },
-  { selector: '.video-reviews', time: 17.28 },
-  { selector: '#account', time: 20.10 },
-  { selector: '#contacts', time: 20.10 }
+  { selector: '#platform', time: 9.20 },
+  { selector: '.video-reviews', time: 12.24 },
+  { selector: '#account', time: 17.30, widen: .2 },
+  { selector: '#contacts', time: 20.10, arrive: .8, widen: .1 }
 ];
 const categoryFilmStops = { drills: 3.08, grinders: 6.16, jigsaws: 9.20 };
 let activeCategoryFilmStop = null;
@@ -37,6 +37,8 @@ const getSectionStops = () => sectionFilmStops.map(stop => {
   if (!element) return null;
   return {
     time: stop.time,
+    arrive: stop.arrive,
+    widen: stop.widen,
     point: element.offsetTop + element.offsetHeight * .5,
     top: element.offsetTop,
     height: element.offsetHeight
@@ -63,11 +65,16 @@ const getScrollFilmTarget = () => {
 
   for (let index = 0; index < ranges.length; index += 1) {
     const current = ranges[index];
-    if (scrollPosition <= current.end && scrollPosition >= current.start) return current.time;
-
     const next = ranges[index + 1];
-    if (next && scrollPosition > current.end && scrollPosition < next.start) {
-      const progress = Math.min(1, Math.max(0, (scrollPosition - current.end) / Math.max(1, next.start - current.end)));
+    // `widen` на next (в долях высоты экрана): заканчиваем статичный кадр current раньше,
+    // чтобы переход к next проигрывался на большей длине скролла и был плавнее.
+    const effEnd = current.end - (next && next.widen ? next.widen * window.innerHeight : 0);
+    if (scrollPosition <= effEnd && scrollPosition >= current.start) return current.time;
+
+    if (next && scrollPosition > effEnd && scrollPosition < next.start) {
+      let progress = Math.min(1, Math.max(0, (scrollPosition - effEnd) / Math.max(1, next.start - effEnd)));
+      // `arrive` (0..1): завершить переход к next раньше конца промежутка и держать кадр остаток пути.
+      if (next.arrive) progress = Math.min(1, progress / next.arrive);
       const eased = progress * progress * (3 - 2 * progress);
       return current.time + (next.time - current.time) * eased;
     }

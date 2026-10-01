@@ -164,36 +164,75 @@ const waitForFilmMetadata = () => new Promise((resolve, reject) => {
   mainFilm.addEventListener('error', onError, { once: true });
 });
 
-const filmHasSeekableTimeline = () => {
-  if (!mainFilm || !Number.isFinite(mainFilm.duration) || !mainFilm.seekable.length) return false;
-  return mainFilm.seekable.end(mainFilm.seekable.length - 1) >= mainFilm.duration - .25;
+const siteLoader = document.querySelector('[data-site-loader]');
+const loaderBar = document.querySelector('[data-loader-bar]');
+const loaderPct = document.querySelector('[data-loader-pct]');
+let loaderHidden = false;
+const setLoaderProgress = value => {
+  const pct = Math.max(0, Math.min(100, Math.round(value)));
+  if (loaderBar) loaderBar.style.width = `${pct}%`;
+  if (loaderPct) loaderPct.textContent = `${pct}%`;
+};
+const hideLoader = () => {
+  if (loaderHidden || !siteLoader) return;
+  loaderHidden = true;
+  setLoaderProgress(100);
+  siteLoader.classList.add('is-hidden');
+  siteLoader.setAttribute('aria-hidden', 'true');
+};
+
+// Полностью скачиваем ролик в память (Blob): тогда скролл-скраб не перескакивает
+// по незагруженным участкам и не упирается в сетевые seek-запросы. Ждём ПОЛНОЙ
+// загрузки; прерываем только если соединение «умерло» — нет новых данных дольше
+// stall-окна (не по общему таймеру, чтобы не оборвать медленную, но живую загрузку).
+const preloadFilmBlob = async controller => {
+  const sourceUrl = mainFilm.currentSrc;
+  if (!sourceUrl) return false;
+  const response = await fetch(sourceUrl, { cache: 'force-cache', signal: controller.signal });
+  if (!response.ok || !response.body) throw new Error(`Видео недоступно: ${response.status}`);
+  const total = Number(response.headers.get('Content-Length')) || 0;
+  const reader = response.body.getReader();
+  const chunks = [];
+  let received = 0;
+  const STALL_MS = 30000;
+  let stall = window.setTimeout(() => controller.abort(), STALL_MS);
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      window.clearTimeout(stall);
+      stall = window.setTimeout(() => controller.abort(), STALL_MS);
+      chunks.push(value);
+      received += value.length;
+      if (total) setLoaderProgress((received / total) * 100);
+    }
+  } finally {
+    window.clearTimeout(stall);
+  }
+  const objectUrl = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
+  mainFilm.src = objectUrl;
+  mainFilm.load();
+  await waitForFilmMetadata();
+  window.addEventListener('pagehide', () => URL.revokeObjectURL(objectUrl), { once: true });
+  return true;
 };
 
 const prepareMainFilm = async () => {
-  if (!mainFilm) return;
+  if (!mainFilm) { hideLoader(); return; }
+  const controller = new AbortController();
   try {
     await waitForFilmMetadata();
-
-    // Some lightweight localhost servers do not support HTTP Range requests.
-    // In that case a fully loaded local Blob restores precise scroll scrubbing.
-    const isLocalPreview = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
-    if (isLocalPreview && !filmHasSeekableTimeline()) {
-      const sourceUrl = mainFilm.currentSrc;
-      if (sourceUrl) {
-        const response = await fetch(sourceUrl, { cache: 'force-cache' });
-        if (!response.ok) throw new Error(`Видео недоступно: ${response.status}`);
-        const objectUrl = URL.createObjectURL(await response.blob());
-        mainFilm.src = objectUrl;
-        mainFilm.load();
-        await waitForFilmMetadata();
-        window.addEventListener('pagehide', () => URL.revokeObjectURL(objectUrl), { once: true });
-      }
-    }
-
+    // Держим лоадер до ПОЛНОЙ загрузки ролика — без прерывания по времени.
+    await preloadFilmBlob(controller);
     setupCinematicScroll();
   } catch (error) {
+    // Только при реальном сбое (файл недоступен / соединение умерло) не висим вечно:
+    // показываем сайт и стримим как запасной вариант.
+    console.warn('APEXWOLT film preload failed, streaming fallback:', error);
     mainFilm.classList.add('is-active');
-    console.warn('APEXWOLT film fallback:', error);
+    try { setupCinematicScroll(); } catch (e) {}
+  } finally {
+    hideLoader();
   }
 };
 

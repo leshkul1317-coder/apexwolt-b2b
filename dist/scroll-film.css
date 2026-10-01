@@ -7,6 +7,78 @@ body {
   background: #f7f8fa;
 }
 
+/* Полноэкранный лоадер: держим экран, пока ролик не прогрузится целиком (плавный скролл-скраб без сетевых перескоков). */
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  transition: opacity .6s ease, visibility .6s ease;
+}
+.site-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.site-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  animation: site-loader-in .9s cubic-bezier(.22, 1, .36, 1) both;
+}
+/* iOS/Apple-стиль: кольцо из сужающихся спиц, гаснущих по кругу */
+.ios-spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+.ios-spinner i {
+  position: absolute;
+  top: 3px;
+  left: calc(50% - 1.5px);
+  width: 3px;
+  height: 13px;
+  border-radius: 999px;
+  background: #3a3a3c;
+  opacity: .12;
+  transform-origin: 1.5px 21px;
+  animation: ios-spin 1.2s linear infinite;
+}
+.ios-spinner i:nth-child(1)  { transform: rotate(0deg);   animation-delay: -1.2s; }
+.ios-spinner i:nth-child(2)  { transform: rotate(30deg);  animation-delay: -1.1s; }
+.ios-spinner i:nth-child(3)  { transform: rotate(60deg);  animation-delay: -1.0s; }
+.ios-spinner i:nth-child(4)  { transform: rotate(90deg);  animation-delay: -0.9s; }
+.ios-spinner i:nth-child(5)  { transform: rotate(120deg); animation-delay: -0.8s; }
+.ios-spinner i:nth-child(6)  { transform: rotate(150deg); animation-delay: -0.7s; }
+.ios-spinner i:nth-child(7)  { transform: rotate(180deg); animation-delay: -0.6s; }
+.ios-spinner i:nth-child(8)  { transform: rotate(210deg); animation-delay: -0.5s; }
+.ios-spinner i:nth-child(9)  { transform: rotate(240deg); animation-delay: -0.4s; }
+.ios-spinner i:nth-child(10) { transform: rotate(270deg); animation-delay: -0.3s; }
+.ios-spinner i:nth-child(11) { transform: rotate(300deg); animation-delay: -0.2s; }
+.ios-spinner i:nth-child(12) { transform: rotate(330deg); animation-delay: -0.1s; }
+.site-loader-pct {
+  font: 500 11px/1 'Golos Text', system-ui, sans-serif;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, .35);
+}
+@keyframes ios-spin {
+  0% { opacity: 1; }
+  100% { opacity: .12; }
+}
+@keyframes site-loader-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-loader-inner { animation: none; }
+  .ios-spinner i { animation-duration: 2.4s; }
+}
+
 .site-film {
   position: fixed;
   inset: 0;

@@ -242,3 +242,32 @@
   .widget-footer { align-items: flex-start; flex-direction: column; }
   .overview-hero h2, .panel-intro h2 { font-size: 46px; }
 }
+
+/* ===== Упрощённый кабинет: онбординг, под-вкладки, раздел «Менеджер» ===== */
+.onboarding-steps{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:13px 0 0; padding:0; }
+.onboarding-steps li{ display:grid; grid-template-rows:auto 1fr auto; gap:12px; min-height:150px; padding:20px; border:1px solid rgba(255,255,255,.82); border-radius:20px; background:rgba(255,255,255,.72); box-shadow:0 16px 38px rgba(28,35,48,.055), inset 0 1px 0 #fff; -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
+.onboarding-steps li b{ display:inline-grid; place-items:center; width:30px; height:30px; border-radius:9px; background:rgba(16,17,20,.06); color:#7b7f87; font-size:12px; font-weight:700; }
+.onboarding-steps li.is-current b{ background:var(--account-blue); color:#fff; box-shadow:0 8px 18px rgba(47,99,255,.28); }
+.onboarding-steps li h4{ margin:0 0 5px; font-size:14px; letter-spacing:-.03em; }
+.onboarding-steps li p{ margin:0; color:#737882; font-size:10.5px; line-height:1.5; }
+.onboarding-steps li p span{ color:var(--account-ink); font-weight:700; }
+.onboarding-steps li a, .onboarding-steps li button{ justify-self:start; padding:0; border:0; background:transparent; color:var(--account-blue); font-size:9.5px; font-weight:720; cursor:pointer; }
+.onboarding-steps li a i, .onboarding-steps li button i{ margin-left:7px; font-style:normal; }
+
+.account-subtabs{ margin-top:-2px; }
+.account-subtabs[hidden]{ display:none; }
+
+.manager-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:12px; align-items:start; }
+.manager-channels{ display:grid; gap:12px; align-content:start; }
+.manager-channels article{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px; padding:18px 20px; border:1px solid rgba(255,255,255,.82); border-radius:20px; background:rgba(255,255,255,.72); box-shadow:0 16px 38px rgba(28,35,48,.055), inset 0 1px 0 #fff; }
+.manager-channels h3{ margin:0 0 3px; font-size:14px; letter-spacing:-.03em; }
+.manager-channels p{ margin:0; color:#737882; font-size:10px; line-height:1.45; }
+.manager-channels button{ padding:0; border:0; background:transparent; color:var(--account-blue); font-size:9.5px; font-weight:720; white-space:nowrap; cursor:pointer; }
+
+@media (max-width:860px){
+  .onboarding-steps{ grid-template-columns:1fr; }
+  .onboarding-steps li{ min-height:0; }
+  .manager-grid{ grid-template-columns:1fr; }
+  .manager-channels article{ grid-template-columns:auto 1fr; }
+  .manager-channels button{ grid-column:2; justify-self:start; }
+}

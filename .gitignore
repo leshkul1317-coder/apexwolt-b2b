@@ -1,2 +1,5 @@
 # Local Netlify folder
 .netlify
+
+# Внутренняя матрица цен (себестоимость) — не в репозиторий
+catalog-tools/*.xlsx

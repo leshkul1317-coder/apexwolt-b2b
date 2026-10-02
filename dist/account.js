@@ -1,18 +1,20 @@
 (() => {
-  const sectionTitles = {
-    overview: 'Обзор',
-    organization: 'Моя организация',
-    requests: 'Заявки',
-    orders: 'Заказы',
-    finance: 'Финансы и документы',
-    service: 'Сервис',
-    materials: 'Материалы',
-    integrations: 'Интеграции'
+  // Пять крупных разделов. Объединённые разделы показывают под-вкладки,
+  // которые переключают исходные панели (контент панелей не меняется).
+  const groups = {
+    overview:     { title: 'Обзор',           panels: [{ id: 'overview' }] },
+    organization: { title: 'Моя организация', panels: [{ id: 'organization', label: 'Реквизиты и команда' }, { id: 'integrations', label: 'Интеграции' }] },
+    requests:     { title: 'Заявки и заказы', panels: [{ id: 'requests', label: 'Заявки' }, { id: 'orders', label: 'Заказы' }, { id: 'service', label: 'Сервис' }] },
+    finance:      { title: 'Документы',        panels: [{ id: 'finance', label: 'Финансы' }, { id: 'materials', label: 'Материалы' }] },
+    manager:      { title: 'Менеджер',         panels: [{ id: 'manager' }] }
   };
 
-  const navButtons = [...document.querySelectorAll('[data-account-section]')];
+  const panelGroup = {};
+  Object.entries(groups).forEach(([group, cfg]) => cfg.panels.forEach(p => { panelGroup[p.id] = group; }));
+
   const panels = [...document.querySelectorAll('[data-account-panel]')];
   const sectionTitle = document.querySelector('[data-section-title]');
+  const subtabsEl = document.querySelector('[data-account-subtabs]');
   const toast = document.querySelector('[data-account-toast]');
 
   const showToast = message => {
@@ -23,16 +25,39 @@
     showToast.timeout = window.setTimeout(() => toast.classList.remove('is-visible'), 2600);
   };
 
-  const setSection = name => {
-    if (!sectionTitles[name]) return;
-    panels.forEach(panel => panel.classList.toggle('is-active', panel.dataset.accountPanel === name));
-    document.querySelectorAll('.account-nav [data-account-section]').forEach(button => button.classList.toggle('is-active', button.dataset.accountSection === name));
-    if (sectionTitle) sectionTitle.textContent = sectionTitles[name];
-    if (history.replaceState) history.replaceState(null, '', `#${name}`);
+  const showPanel = panelId => {
+    panels.forEach(panel => panel.classList.toggle('is-active', panel.dataset.accountPanel === panelId));
+    if (subtabsEl) subtabsEl.querySelectorAll('button').forEach(btn => btn.classList.toggle('is-active', btn.dataset.subtab === panelId));
+  };
+
+  const renderSubtabs = group => {
+    if (!subtabsEl) return;
+    const cfg = groups[group];
+    const tabbable = cfg && cfg.panels.length > 1 && cfg.panels.every(p => p.label);
+    if (!tabbable) { subtabsEl.hidden = true; subtabsEl.innerHTML = ''; return; }
+    subtabsEl.hidden = false;
+    subtabsEl.innerHTML = cfg.panels
+      .map((p, i) => `<button type="button" role="tab" data-subtab="${p.id}" class="${i === 0 ? 'is-active' : ''}">${p.label}</button>`)
+      .join('');
+    subtabsEl.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => showPanel(btn.dataset.subtab)));
+  };
+
+  const setSection = (group, panelId) => {
+    if (!groups[group]) return;
+    document.querySelectorAll('.account-nav [data-account-section]').forEach(btn => btn.classList.toggle('is-active', btn.dataset.accountSection === group));
+    if (sectionTitle) sectionTitle.textContent = groups[group].title;
+    renderSubtabs(group);
+    showPanel(panelId && panelGroup[panelId] === group ? panelId : groups[group].panels[0].id);
+    if (history.replaceState) history.replaceState(null, '', `#${panelId || group}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  navButtons.forEach(button => button.addEventListener('click', () => setSection(button.dataset.accountSection)));
+  // Любой элемент с data-account-section: имя группы → раздел; имя панели → раздел + нужная под-вкладка.
+  const go = target => {
+    if (groups[target]) setSection(target);
+    else if (panelGroup[target]) setSection(panelGroup[target], target);
+  };
+  document.querySelectorAll('[data-account-section]').forEach(btn => btn.addEventListener('click', () => go(btn.dataset.accountSection)));
 
   const readDraft = () => {
     try {
@@ -57,8 +82,11 @@
     showToast(`${button.dataset.demoAction}: интерфейс подготовлен, подключение серверной логики будет следующим этапом.`);
   }));
 
-  const requestedSection = window.location.hash.replace('#', '');
-  setSection(sectionTitles[requestedSection] ? requestedSection : 'overview');
+  const requested = window.location.hash.replace('#', '');
+  if (groups[requested]) setSection(requested);
+  else if (panelGroup[requested]) setSection(panelGroup[requested], requested);
+  else setSection('overview');
+
   renderDraft();
   window.addEventListener('storage', renderDraft);
 })();

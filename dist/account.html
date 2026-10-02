@@ -7,7 +7,7 @@
   <title>Личный кабинет — APEXWOLT</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=typography-v2" />
-  <link rel="stylesheet" href="account.css?v=4" />
+  <link rel="stylesheet" href="account.css?v=5" />
 </head>
 <body class="account-page">
   <svg class="account-icon-sprite" aria-hidden="true">
@@ -43,12 +43,9 @@
       <nav class="account-nav" aria-label="Разделы личного кабинета">
         <button class="is-active" type="button" data-account-section="overview"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-overview" /></svg></span>Обзор</button>
         <button type="button" data-account-section="organization"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-building" /></svg></span>Моя организация</button>
-        <button type="button" data-account-section="requests"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-request" /></svg></span>Заявки <i data-sidebar-draft-count>0</i></button>
-        <button type="button" data-account-section="orders"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-box" /></svg></span>Заказы</button>
-        <button type="button" data-account-section="finance"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-finance" /></svg></span>Финансы и документы</button>
-        <button type="button" data-account-section="service"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-service" /></svg></span>Сервис</button>
-        <button type="button" data-account-section="materials"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-catalog" /></svg></span>Материалы</button>
-        <button type="button" data-account-section="integrations"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-nodes" /></svg></span>Интеграции</button>
+        <button type="button" data-account-section="requests"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-request" /></svg></span>Заявки и заказы <i data-sidebar-draft-count>0</i></button>
+        <button type="button" data-account-section="finance"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-finance" /></svg></span>Документы</button>
+        <button type="button" data-account-section="manager"><span class="nav-icon"><svg aria-hidden="true"><use href="#account-icon-manager" /></svg></span>Менеджер</button>
       </nav>
       <div class="sidebar-manager"><span>Ваш менеджер</span><b>Будет назначен после подключения компании</b><button type="button" data-demo-action="Связь с менеджером">Задать вопрос →</button></div>
     </aside>
@@ -56,17 +53,18 @@
     <section class="account-workspace">
       <header class="workspace-header"><div><p>APEXWOLT / B2B</p><h1 data-section-title>Обзор</h1></div><a class="account-primary" href="catalog.html?category=drills">Новая заявка <span>→</span></a></header>
 
+      <div class="account-tabs account-subtabs" data-account-subtabs role="tablist" hidden></div>
+
       <section class="account-panel is-active" data-account-panel="overview">
         <article class="overview-hero">
           <div><p>ДОБРО ПОЖАЛОВАТЬ</p><h2>Все закупки —<br />в одном <em>контуре.</em></h2><span>Подключите организацию, чтобы открыть персональные цены, документы и историю поставок.</span></div>
           <button type="button" data-account-section="organization">Подключить организацию <i>→</i></button>
         </article>
-        <div class="account-metrics">
-          <article><span>Черновик заявки</span><b data-overview-draft-count>0</b><small>позиций сохранено</small></article>
-          <article><span>Активные заказы</span><b>0</b><small>нет заказов в работе</small></article>
-          <article><span>Ожидают оплаты</span><b>0 ₽</b><small>счета отсутствуют</small></article>
-          <article><span>Новые документы</span><b>0</b><small>всё просмотрено</small></article>
-        </div>
+        <ol class="onboarding-steps" aria-label="Как начать работу">
+          <li class="is-current"><b>01</b><div><h4>Подключить организацию</h4><p>Введите ИНН — реквизиты заполнятся автоматически.</p></div><button type="button" data-account-section="organization">Подключить <i>→</i></button></li>
+          <li><b>02</b><div><h4>Собрать заявку</h4><p>Добавьте позиции из каталога в черновик закупки. <span data-overview-draft-count>0</span> уже в черновике.</p></div><a href="catalog.html">В каталог <i>→</i></a></li>
+          <li><b>03</b><div><h4>Менеджер ведёт сделку</h4><p>Проверит цены и сроки, оформит счёт и отгрузку.</p></div></li>
+        </ol>
         <div class="overview-grid">
           <article class="draft-widget">
             <div class="widget-head"><div><p>ТЕКУЩАЯ ЗАЯВКА</p><h3>Черновик закупки</h3></div><a href="catalog.html?category=drills">Добавить товары →</a></div>
@@ -119,10 +117,22 @@
         <div class="panel-intro"><div><p>08 / ИНТЕГРАЦИИ</p><h2>Данные без<br /><em>ручного переноса.</em></h2></div><p>Начнём с файловых выгрузок, затем подключим 1С, ERP и REST API для крупных партнёров.</p></div>
         <div class="integration-list"><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-export" /></svg></span><div><span>XLSX / CSV</span><h3>Прайс-листы и остатки</h3><p>Выгрузка ассортимента, цен и доступности товаров.</p></div><button type="button" data-demo-action="Файловые выгрузки">Настроить</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-nodes" /></svg></span><div><span>1С / ERP</span><h3>Учётная система</h3><p>Заказы, статусы и документы после согласования формата обмена.</p></div><button type="button" data-demo-action="Интеграция с 1С">Оставить заявку</button></article><article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-api" /></svg></span><div><span>REST API</span><h3>API для партнёров</h3><p>Токены, документация, вебхуки и журнал синхронизации.</p></div><button type="button" data-demo-action="REST API">Запросить доступ</button></article></div>
       </section>
+
+      <section class="account-panel" data-account-panel="manager">
+        <div class="panel-intro"><div><p>МЕНЕДЖЕР</p><h2>Личное<br /><em>сопровождение.</em></h2></div><p>Один человек со стороны APEXWOLT ведёт вашу компанию: цены, наличие, сроки, документы и сервис — без общих линий поддержки.</p></div>
+        <div class="manager-grid">
+          <article class="manager-widget"><span class="manager-status">ВАШ МЕНЕДЖЕР</span><div class="manager-avatar"><svg aria-hidden="true"><use href="#account-icon-manager" /></svg></div><h3>Будет назначен после подключения</h3><p>Подключите организацию — здесь появятся имя, фото, телефон и прямой канал связи с персональным менеджером.</p><button type="button" data-account-section="organization">Подключить компанию →</button></article>
+          <div class="manager-channels">
+            <article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-message" /></svg></span><div><h3>Задать вопрос</h3><p>Короткий вопрос по ассортименту, условиям или заявке.</p></div><button type="button" data-demo-action="Вопрос менеджеру">Написать →</button></article>
+            <article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-request" /></svg></span><div><h3>Заказать звонок</h3><p>Менеджер перезвонит в удобное время в рабочие часы.</p></div><button type="button" data-demo-action="Заказ звонка">Заказать →</button></article>
+            <article><span class="account-card-icon"><svg aria-hidden="true"><use href="#account-icon-service" /></svg></span><div><h3>Сервис и гарантия</h3><p>Обращения по ремонту и возвратам — в разделе «Заявки и заказы».</p></div><button type="button" data-account-section="service">Открыть сервис →</button></article>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
   <div class="account-toast" data-account-toast role="status"></div>
-  <script src="account.js?v=1"></script>
+  <script src="account.js?v=2"></script>
 </body>
 </html>

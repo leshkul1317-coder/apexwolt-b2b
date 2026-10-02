@@ -737,7 +737,10 @@
   }
 
   .category-hero h1 {
-    font-size: 52px;
+    font-size: clamp(36px, 10.2vw, 44px);
+    line-height: .92;
+    letter-spacing: -.065em;
+    overflow-wrap: anywhere;
   }
 
   .category-hero-copy > p {
@@ -896,4 +899,29 @@
   .product-cta button {
     width: 100%;
   }
+}
+
+/* Логотип-заглушка вместо фото товара — компактнее и без товарной тени */
+.product-art img[src*="apexwolt-logo-black"]{
+  width: 52%;
+  height: 52%;
+  filter: none;
+  opacity: .82;
+}
+
+/* Бейдж бренда на карточке товара (единый каталог, мультибренд) */
+.product-art { position: relative; }
+.product-brand {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(16, 17, 20, .08);
+  box-shadow: 0 6px 18px rgba(22, 25, 31, .08), inset 0 1px 0 rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  color: #101114; font-size: 10px; font-weight: 760; letter-spacing: .07em; text-transform: uppercase;
+}
+
+/* Иконки категорий (единый line-стиль) в карточке товара, где нет фото */
+.product-art img[src*="assets/icons/"]{
+  width: 42%; height: 42%; object-fit: contain; opacity: .9; filter: none;
 }

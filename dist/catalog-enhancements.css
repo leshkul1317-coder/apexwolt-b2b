@@ -73,6 +73,20 @@
   color: #85888e;
 }
 
+/* Скрытые ключевые слова дочерних категорий внутри карточки направления:
+   остаются в textContent, поэтому поиск на главной (script.js) находит их. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .category-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 13px;
@@ -583,4 +597,136 @@
   .video-review-list { margin-right: -14px; }
   .video-platforms { align-items: stretch; flex-wrap: wrap; }
   .video-platforms > span { width: 100%; margin: 0 0 4px; }
+}
+
+/* Карточки-направления без фото: компактный логотип-заглушка (не во всю ширину), без товарной тени */
+.category-grid .category-visual[style*="apexwolt-logo-black"]{
+  background-size: 74% auto;
+  filter: none;
+  opacity: .82;
+}
+
+/* Футер карточки-направления: название не залезает на стрелку, максимум 2 строки, подпись ниже */
+.category-grid .category-card .category-name{
+  left: 20px; right: 54px; bottom: 44px;
+  font-size: 18px; line-height: 1.14;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.category-grid .category-card .category-meta{ left: 20px; right: 54px; bottom: 20px; }
+.category-grid .category-card .category-arrow{ right: 18px; bottom: 18px; }
+
+/* ======================================================================
+   Hover мега-меню направлений (главная). Десктоп — раскрытие по наведению
+   + превью у курсора; тач — аккордеон по тапу. script.js не затрагивается.
+   ====================================================================== */
+.category-card.has-flyout .cc-coverlink{ position:absolute; inset:0; z-index:1; border-radius:inherit; }
+.category-card.has-flyout .cc-toggle{ z-index:3; cursor:pointer; }
+.category-card.has-flyout:hover .cc-toggle,
+.category-card.has-flyout.is-open .cc-toggle{ transform:rotate(90deg); }
+
+.cc-flyout{
+  position:absolute; left:0; right:0; top:calc(100% - 10px); z-index:30;
+  display:grid; gap:2px; padding:10px; border-radius:16px;
+  background:rgba(255,255,255,.88); border:1px solid rgba(16,17,20,.06);
+  box-shadow:0 26px 56px rgba(22,25,31,.17), inset 0 1px 0 rgba(255,255,255,.92);
+  backdrop-filter:blur(20px) saturate(130%); -webkit-backdrop-filter:blur(20px) saturate(130%);
+  max-height:min(58vh,430px); overflow:auto;
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.category-card.has-flyout:hover{ overflow:visible; z-index:30; }
+.category-card.has-flyout:hover .cc-flyout,
+.category-card.has-flyout.is-open{ z-index:30; }
+.category-card.has-flyout.is-open{ overflow:visible; }
+.category-card.has-flyout:hover .cc-flyout,
+.category-card.has-flyout.is-open .cc-flyout{ opacity:1; visibility:visible; transform:none; }
+
+.cc-sub{ display:flex; align-items:center; gap:10px; padding:9px 11px; border-radius:11px; color:#2b2d31; position:relative; z-index:2; transition:background .15s ease,color .15s ease,opacity .18s ease; }
+.cc-sub:hover{ background:rgba(47,99,255,.08); color:var(--ink,#101114); }
+/* фокус на активном пункте (как в референсе): соседние приглушаются */
+.cc-flyout:hover .cc-sub{ opacity:.45; }
+.cc-flyout .cc-sub:hover{ opacity:1; }
+.cc-sub-label{ flex:1; font-size:12.5px; line-height:1.18; letter-spacing:-.01em; }
+.cc-sub-count{ flex:none; min-width:22px; height:20px; display:inline-grid; place-items:center; padding:0 6px; border-radius:99px; background:rgba(16,17,20,.06); color:#73767c; font-size:10px; }
+.cc-sub-all{ margin-bottom:3px; padding-bottom:11px; border-bottom:1px solid rgba(16,17,20,.08); border-radius:11px 11px 0 0; font-weight:700; }
+.cc-sub-all .cc-sub-label{ color:var(--blue,#2f63ff); }
+.cc-sub-all .cc-sub-count{ background:rgba(47,99,255,.12); color:var(--blue,#2f63ff); }
+
+/* превью товара — ЗАДНИЙ слой панели (под текстом), по центру колонки, следует за курсором по вертикали.
+   left/top (внутри .cc-flyout) задаёт nav-menu.js. Приглушено, чтобы не мешать читаемости. */
+.cc-preview{ position:absolute; z-index:0; width:208px; height:160px;
+  pointer-events:none; opacity:0; transform:translate(-50%,-50%) scale(.96);
+  transition:opacity .2s ease, transform .2s ease; }
+.cc-preview.is-visible{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+.cc-preview img{ width:100%; height:100%; object-fit:contain; opacity:.5; filter:drop-shadow(0 10px 20px rgba(22,25,31,.14)); }
+
+/* тач: не раскрывать по hover, только по тапу (.is-open) */
+@media (hover:none){
+  .category-card.has-flyout:hover{ overflow:hidden; }
+  .category-card.has-flyout:hover .cc-flyout{ opacity:0; visibility:hidden; transform:translateY(8px); }
+  .category-card.has-flyout:hover .cc-toggle{ transform:none; }
+  .category-card.has-flyout.is-open{ overflow:visible; }
+  .category-card.has-flyout.is-open .cc-flyout{ opacity:1; visibility:visible; transform:none; }
+  .category-card.has-flyout.is-open .cc-toggle{ transform:rotate(90deg); }
+  .cc-flyout:hover .cc-sub{ opacity:1; } /* на тач-устройствах пункты не приглушаем */
+}
+
+/* ===== Видеообзоры: реальные превью + ленивый лайтбокс ===== */
+/* превью-обложка видео (16:9) заполняет плитку, в отличие от вырезок-товаров */
+.video-review-thumb.is-cover img{ width:100%; height:100%; object-fit:cover; }
+
+/* карточка-канал (ссылка) — повторяет стиль карточек списка */
+.video-channel-card{ display:grid; grid-template-columns:145px 1fr; align-items:stretch; gap:18px; min-height:0; padding:10px; overflow:hidden; border:1px solid transparent; border-radius:22px; background:rgba(255,255,255,.72); box-shadow:0 16px 44px rgba(26,33,46,.07); -webkit-backdrop-filter:blur(20px) saturate(124%); backdrop-filter:blur(20px) saturate(124%); transition:border-color .3s ease, transform .35s ease, box-shadow .35s ease; }
+.video-channel-card:hover{ border-color:rgba(47,99,255,.3); box-shadow:0 22px 54px rgba(47,99,255,.11); transform:translateY(-2px); }
+.video-channel-card > span:last-child{ display:flex; min-width:0; padding:10px 6px 8px 0; flex-direction:column; justify-content:center; }
+.video-channel-card small{ margin-bottom:10px; color:#2f63ff; font-size:9px; font-weight:780; letter-spacing:.1em; }
+.video-channel-card b{ color:#17191e; font-size:17px; letter-spacing:-.025em; line-height:1.08; }
+.video-channel-card em{ margin-top:9px; color:#747880; font-size:11px; font-style:normal; font-weight:540; line-height:1.35; }
+.video-review-thumb.is-channel{ background:linear-gradient(150deg,#15181f 0%,#243049 100%); }
+.video-review-thumb.is-channel i{ position:static; width:44px; height:44px; font-size:13px; }
+
+@media (min-width:981px){
+  .video-review-list.is-compact{ grid-template-rows:repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:980px){
+  .video-channel-card{ grid-template-columns:112px 1fr; min-height:170px; }
+}
+
+/* Лайтбокс плеера (iframe грузится только по клику) */
+.video-lightbox{ position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:24px; background:rgba(10,12,16,.82); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s; }
+.video-lightbox.is-open{ opacity:1; visibility:visible; }
+.video-lightbox-frame{ position:relative; width:min(100%, 1040px); aspect-ratio:16/9; border-radius:18px; overflow:hidden; background:#000; box-shadow:0 40px 100px rgba(0,0,0,.5); transform:scale(.96); transition:transform .25s ease; }
+.video-lightbox.is-open .video-lightbox-frame{ transform:scale(1); }
+.video-lightbox-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-lightbox-close{ position:absolute; top:-46px; right:0; width:38px; height:38px; display:grid; place-items:center; border:0; border-radius:50%; background:rgba(255,255,255,.15); color:#fff; font-size:17px; cursor:pointer; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); transition:background .2s ease; }
+.video-lightbox-close:hover{ background:rgba(255,255,255,.26); }
+@media (max-width:620px){ .video-lightbox{ padding:16px; } .video-lightbox-close{ top:-42px; } }
+
+/* ===== Видеокарточки: усиленное матовое стекло + editorial-надпись ===== */
+.video-review-list button,
+.video-channel-card{ border:1px solid rgba(255,255,255,.66); box-shadow:0 18px 48px rgba(26,33,46,.1), inset 0 1px 0 rgba(255,255,255,.92); }
+.video-featured{ border:1px solid rgba(255,255,255,.16); }
+.video-review-thumb{ box-shadow:inset 0 0 0 1px rgba(255,255,255,.4); }
+
+/* Градиент «из белого в полную прозрачность (стекло)» на промо- и шортс-карточках —
+   как в заголовках-локапах (.section-title-lockup). Рамка + backdrop-blur сохраняют форму,
+   текст остаётся читаемым на матовом стекле. Большой обзор (.video-featured) не трогаем. */
+.video-review-list button,
+.video-channel-card{
+  background:
+    radial-gradient(circle at 72% 26%, rgba(255,255,255,.80) 0%, rgba(255,255,255,0) 34%),
+    linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.76) 60%, rgba(255,255,255,0) 100%);
+}
+
+/* Крупная полупрозрачная надпись на фоне главного обзора (soft-light — «вживлённый» премиум-эффект) */
+.video-featured-brand{ position:absolute; left:clamp(22px,3vw,34px); top:clamp(18px,2.4vw,30px); z-index:2;
+  margin:0; color:#fff; opacity:.6; mix-blend-mode:soft-light; pointer-events:none;
+  font-size:clamp(38px,7.4vw,104px); font-weight:800; letter-spacing:-.035em; line-height:.86; text-transform:uppercase; }
+
+/* Иконки категорий (единый line-стиль) на карточках-направлениях главной */
+.category-grid .category-visual[style*="assets/icons/"]{
+  background-size: 38% auto;
+  background-position: center;
+  opacity: .9;
+  filter: none;
 }

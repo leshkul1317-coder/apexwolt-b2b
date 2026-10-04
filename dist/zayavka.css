@@ -116,11 +116,16 @@
 
 /* Успех */
 .zv-success { margin-top: 24px; }
-.zv-success-inner { max-width: 620px; margin: 40px auto; padding: 40px 32px; text-align: center; border: 1px solid rgba(31, 157, 85, .2); border-radius: 24px; background: rgba(31, 157, 85, .05); }
-.zv-success-mark { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; background: #1f9d55; color: #fff; font-size: 28px; }
-.zv-success-inner h2 { margin: 0 0 8px; font-size: 24px; letter-spacing: -.02em; }
-.zv-success-inner p { margin: 0; color: #4a4e56; font-size: 13px; line-height: 1.55; }
-.zv-success-link { display: inline-block; margin-top: 20px; color: var(--accent-blue, #2f63ff); font-size: 13px; font-weight: 700; }
+.zv-success-inner { max-width: 500px; margin: 48px auto; padding: 40px 36px; text-align: center; border: 1px solid rgba(255, 255, 255, .8); border-radius: 24px; background: rgba(255, 255, 255, .72); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: 0 26px 60px rgba(22, 25, 31, .1), inset 0 1px 0 #fff; }
+.zv-success-logo { height: 24px; width: auto; margin: 0 auto 22px; opacity: .9; }
+.zv-success-mark { display: grid; place-items: center; width: 60px; height: 60px; margin: 0 auto 20px; border-radius: 50%; background: #1f9d55; color: #fff; box-shadow: 0 10px 24px rgba(31, 157, 85, .32); }
+.zv-success-mark svg { width: 30px; height: 30px; }
+.zv-success-inner h2 { margin: 0 0 10px; font-size: 24px; letter-spacing: -.02em; }
+.zv-success-id { margin: 0 0 10px !important; font-size: 13px; color: #101114 !important; }
+.zv-success-id b { font-variant-numeric: tabular-nums; }
+.zv-success-inner p { margin: 0; color: #5a5e66; font-size: 13px; line-height: 1.55; }
+.zv-success-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; margin-top: 24px; padding: 0 28px; border-radius: 13px; background: #101114; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .01em; transition: background .2s ease, transform .15s ease; }
+.zv-success-btn:hover { background: var(--accent-blue, #2f63ff); transform: translateY(-1px); }
 
 /* Адаптив */
 @media (max-width: 960px) {

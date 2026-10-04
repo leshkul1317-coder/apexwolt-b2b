@@ -356,6 +356,10 @@
 }
 
 .stock-line b {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
   font-size: 13px;
 }
 

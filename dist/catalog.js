@@ -126,7 +126,70 @@ const bindCardActions = () => {
   document.querySelectorAll('[data-auth-gate]').forEach(item => item.addEventListener('click', () => {
     showToast('Коммерческие условия откроются после авторизации компании');
   }));
+  document.querySelectorAll('[data-product-open]').forEach(card => {
+    if (card.dataset.pvBound) return;
+    card.dataset.pvBound = 'true';
+    card.addEventListener('click', e => {
+      if (e.target.closest('button, a, .product-action, [data-auth-gate]')) return;
+      openQuickView(card.dataset.productOpen);
+    });
+  });
 };
+
+// ---- Быстрый просмотр товара (модалка): компактная карточка + детали по клику ----
+const pvOverlay = document.querySelector('[data-pv-overlay]');
+const pvBody = pvOverlay ? pvOverlay.querySelector('[data-pv-body]') : null;
+
+const openQuickView = id => {
+  const p = products.find(x => String(x.id) === String(id));
+  if (!p || !pvBody) return;
+  const status = p.stock ? 'В наличии' : 'В пути';
+  const shipTerm = p.lead ? `отгрузка от ${p.lead} дн.` : '';
+  const statusDetail = p.stock
+    ? (shipTerm ? shipTerm.charAt(0).toUpperCase() + shipTerm.slice(1) : 'Доступно к заявке')
+    : (p.eta ? `Ожидается ${p.eta}${shipTerm ? ' · ' + shipTerm : ''}` : 'Срок уточнит менеджер');
+  const statusClass = p.stock ? '' : ' is-order';
+  const focusUrl = `${window.location.pathname}${window.location.search}${window.location.search ? '&' : '?'}focus=${encodeURIComponent(p.id)}`;
+  const dataAttrs = `data-product-id="${escapeHtml(p.id)}" data-product-name="${escapeHtml(p.name)}" data-product-meta="${escapeHtml(p.code)}" data-product-url="${escapeHtml(focusUrl)}" data-product-price="${p.price}" data-product-stock="${p.stock}" data-product-lead="${p.lead}" data-product-brand="${escapeHtml(p.brand)}" data-product-image="${escapeHtml(p.image)}" data-product-mp="${p.mp ?? ''}" data-product-desc="${escapeHtml(p.description)}" data-product-specs="${escapeHtml(JSON.stringify(p.specs || []))}"`;
+  pvBody.innerHTML = `
+    <div class="pv-media">${p.brand ? `<span class="product-brand">${escapeHtml(p.brand)}</span>` : ''}<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" /></div>
+    <div class="pv-main">
+      <div class="pv-actions-top"><button class="product-action" type="button" data-favorite-product ${dataAttrs} aria-label="Сохранить позицию">${iconHeart}</button><button class="product-action" type="button" data-compare-product ${dataAttrs} aria-label="Добавить к сравнению">${iconCompare}</button></div>
+      <p class="product-code">Артикул: <strong>${escapeHtml(p.code)}</strong></p>
+      <h2>${escapeHtml(p.name)}</h2>
+      <div class="stock-line${statusClass}"><b><i></i>${status}</b><span>${statusDetail}</span></div>
+      <div class="commercial-grid">${renderCommercialCell('Цена партнёра', 'После авторизации')}${renderCommercialCell('МРЦ', formatMoney(p.price), false)}${renderCommercialCell('Маржинальность', 'После авторизации')}${renderCommercialCell('Средняя цена на МП', p.mp ? formatMoney(p.mp) : 'Нет данных', false)}</div>
+      ${p.description ? `<p class="pv-desc">${escapeHtml(p.description)}</p>` : ''}
+      ${(p.specs && p.specs.length) ? `<div class="pv-specs-wrap"><p class="pv-specs-title">Характеристики</p><ul class="pv-specs">${p.specs.map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul></div>` : ''}
+      <div class="product-cta"><button type="button" data-add-product="${escapeHtml(p.name)}" data-add-code="${escapeHtml(p.code)}" data-add-brand="${escapeHtml(p.brand)}" data-add-mrc="${p.price ?? ''}" data-add-image="${escapeHtml(p.image)}">Добавить в заявку</button></div>
+    </div>`;
+  pvBody.querySelector('[data-add-product]')?.addEventListener('click', e => {
+    const b = e.currentTarget;
+    cart.push(b.dataset.addProduct);
+    writeCartMeta(b.dataset.addProduct, { code: b.dataset.addCode, brand: b.dataset.addBrand, mrc: b.dataset.addMrc, image: b.dataset.addImage });
+    renderCart();
+    showToast('Позиция добавлена в заявку');
+  });
+  pvBody.querySelectorAll('[data-auth-gate]').forEach(el => el.addEventListener('click', () => showToast('Коммерческие условия откроются после авторизации компании')));
+  window.dispatchEvent(new CustomEvent('catalog:rendered')); // привязать избранное/сравнение в модалке (collections.js, идемпотентно)
+  pvBody.scrollTop = 0;
+  pvOverlay.hidden = false;
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => pvOverlay.classList.add('is-open'));
+};
+
+const closeQuickView = () => {
+  if (!pvOverlay) return;
+  pvOverlay.classList.remove('is-open');
+  document.body.style.overflow = '';
+  setTimeout(() => { pvOverlay.hidden = true; }, 220);
+};
+
+if (pvOverlay) {
+  pvOverlay.querySelectorAll('[data-pv-close]').forEach(b => b.addEventListener('click', closeQuickView));
+  pvOverlay.addEventListener('click', e => { if (e.target === pvOverlay) closeQuickView(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !pvOverlay.hidden) closeQuickView(); });
+}
 
 const renderProducts = () => {
   const query = (search.value || '').trim().toLowerCase();
@@ -145,11 +208,13 @@ const renderProducts = () => {
     const statusClass = product.stock ? '' : ' is-order';
     const focusUrl = `${window.location.pathname}${window.location.search}${window.location.search ? '&' : '?'}focus=${encodeURIComponent(product.id)}`;
     const dataAttrs = `data-product-id="${escapeHtml(product.id)}" data-product-name="${escapeHtml(product.name)}" data-product-meta="${escapeHtml(product.code)}" data-product-url="${escapeHtml(focusUrl)}" data-product-price="${product.price}" data-product-stock="${product.stock}" data-product-lead="${product.lead}" data-product-brand="${escapeHtml(product.brand)}" data-product-image="${escapeHtml(product.image)}" data-product-mp="${product.mp ?? ''}" data-product-desc="${escapeHtml(product.description)}" data-product-specs="${escapeHtml(JSON.stringify(product.specs || []))}"`;
-    return `<article class="product-card" data-card-id="${escapeHtml(product.id)}">
+    const chipVal = s => { const i = String(s).indexOf(':'); const v = (i >= 0 ? String(s).slice(i + 1) : String(s)).trim(); return v.length > 24 ? v.slice(0, 23) + '…' : v; };
+    const chips = (product.specs || []).slice(0, 3).map(s => `<li>${escapeHtml(chipVal(s))}</li>`).join('');
+    return `<article class="product-card" data-card-id="${escapeHtml(product.id)}" data-product-open="${escapeHtml(product.id)}">
       <div class="product-actions"><button class="product-action" type="button" data-favorite-product ${dataAttrs} aria-label="Сохранить позицию">${iconHeart}</button><button class="product-action" type="button" data-compare-product ${dataAttrs} aria-label="Добавить к сравнению">${iconCompare}</button></div>
       <div class="product-art">${product.brand ? `<span class="product-brand">${escapeHtml(product.brand)}</span>` : ''}<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" /></div>
-      <div class="product-info"><p class="product-code">Артикул: <strong>${escapeHtml(product.code)}</strong></p><h2>${escapeHtml(product.name)}</h2><p class="product-description">${escapeHtml(product.description)}</p><ul class="product-specs">${product.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join('')}</ul></div>
-      <div class="product-commerce"><div class="stock-line${statusClass}"><b><i></i>${status}</b><span>${statusDetail}</span></div><div class="commercial-grid">${renderCommercialCell('Цена партнёра', 'После авторизации')}${renderCommercialCell('МРЦ', formatMoney(product.price), false)}${renderCommercialCell('Маржинальность', 'После авторизации')}${renderCommercialCell('Средняя цена на МП', product.mp ? formatMoney(product.mp) : 'Нет данных', false)}</div><div class="product-cta"><small>Количество и условия уточнит закреплённый менеджер.</small><button type="button" data-add-product="${escapeHtml(product.name)}" data-add-code="${escapeHtml(product.code)}" data-add-brand="${escapeHtml(product.brand)}" data-add-mrc="${product.price ?? ''}" data-add-image="${escapeHtml(product.image)}">Добавить в заявку</button></div></div>
+      <div class="product-info"><p class="product-code">Артикул: <strong>${escapeHtml(product.code)}</strong></p><h2>${escapeHtml(product.name)}</h2>${chips ? `<ul class="product-chips">${chips}</ul>` : ''}<span class="product-more">Подробнее о товаре →</span></div>
+      <div class="product-commerce"><div class="stock-line${statusClass}"><b><i></i>${status}</b><span>${statusDetail}</span></div><div class="product-price"><small>МРЦ</small><strong>${formatMoney(product.price)}</strong><em>Цена партнёра — после авторизации</em></div><div class="product-cta"><button type="button" data-add-product="${escapeHtml(product.name)}" data-add-code="${escapeHtml(product.code)}" data-add-brand="${escapeHtml(product.brand)}" data-add-mrc="${product.price ?? ''}" data-add-image="${escapeHtml(product.image)}">Добавить в заявку</button></div></div>
     </article>`;
   }).join('');
   window.dispatchEvent(new CustomEvent('catalog:rendered'));

@@ -6,7 +6,7 @@ const sectionFilmStops = [
   { selector: '.service-intro', time: 6.16 },
   { selector: '.partner-support', time: 9.20 },
   { selector: '#platform', time: 9.20 },
-  { selector: '.video-reviews', time: 12.50 },
+  { selector: '.video-reviews', time: 12.15 },
   { selector: '#account', time: 17.30, widen: .2 },
   { selector: '#contacts', time: 20.10, arrive: .8, widen: .1 }
 ];

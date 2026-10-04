@@ -269,7 +269,7 @@
         localStorage.removeItem(CART); localStorage.removeItem(METAK); cart = [];
         grid.style.display = 'none'; contact.hidden = true; setStep(3);
         successEl.hidden = false;
-        successEl.innerHTML = `<div class="zv-success-inner"><img class="zv-success-logo" src="assets/apexwolt-logo-solid.svg" alt="APEXWOLT" /><span class="zv-success-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><h2>Заявка отправлена</h2><p class="zv-success-id">Номер заявки: <b>${esc(data.id)}</b></p><p>Менеджер проверит цены, наличие и сроки и свяжется с вами по указанным контактам. Подтверждение придёт на вашу почту.</p><a class="zv-success-btn" href="catalog.html">Вернуться в каталог</a></div>`;
+        successEl.innerHTML = `<div class="zv-success-inner"><span class="zv-success-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><h2>Заявка отправлена</h2><p class="zv-success-id">Номер заявки: <b>${esc(data.id)}</b></p><p>Менеджер проверит цены, наличие и сроки и свяжется с вами по указанным контактам. Подтверждение придёт на вашу почту.</p><a class="zv-success-btn" href="catalog.html">Вернуться в каталог</a></div>`;
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         showToast('Заявка отправлена менеджеру');
       } else setFeedback(data.error || 'Не удалось отправить заявку. Попробуйте ещё раз.');

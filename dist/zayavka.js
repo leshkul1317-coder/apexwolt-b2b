@@ -6,7 +6,7 @@
   if (typeof categoryData === 'undefined') return;
 
   const VAT_RATE = 22;
-  const CART = 'apexwolt-cart', METAK = 'apexwolt-cart-meta';
+  const CART = 'apexwolt-cart', METAK = 'apexwolt-cart-meta', LAST = 'apexwolt-last-order';
 
   // ---- данные ----
   const sectionByCategory = {};
@@ -155,6 +155,24 @@
     </article>`).join('');
   };
 
+  // повторный заказ: восстановить последнюю отправленную заявку
+  const restoreLast = () => {
+    const last = read(LAST, 'null');
+    if (!last || !Array.isArray(last.cart) || !last.cart.length) return;
+    cart = [...last.cart]; saveCart();
+    if (last.meta) writeMeta(last.meta);
+    renderAll();
+    showToast('Последняя заявка восстановлена');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  const renderEmpty = () => {
+    const last = read(LAST, 'null');
+    const n = (last && Array.isArray(last.cart)) ? new Set(last.cart).size : 0;
+    emptyEl.innerHTML = `Заявка пуста. <a href="catalog.html">Перейти в каталог →</a>` +
+      (n ? `<button type="button" class="zv-repeat" data-zv-repeat>↺ Повторить последнюю заявку (${n} ${plural(n, ['позиция', 'позиции', 'позиций'])})</button>` : '');
+    emptyEl.querySelector('[data-zv-repeat]')?.addEventListener('click', restoreLast);
+  };
+
   const renderAll = () => {
     const its = lineItems();
     countEl.textContent = `${its.length} ${plural(its.length, ['позиция', 'позиции', 'позиций'])}`;
@@ -162,7 +180,7 @@
     emptyEl.hidden = !empty;
     itemsHost.hidden = empty;
     if (summaryWrap) summaryWrap.style.display = empty ? 'none' : '';
-    if (empty) { recoWrap.hidden = true; itemsHost.innerHTML = ''; return; }
+    if (empty) { recoWrap.hidden = true; itemsHost.innerHTML = ''; renderEmpty(); return; }
     renderItems(its); renderSummary(its); renderReco();
   };
 
@@ -266,6 +284,7 @@
       const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
+        localStorage.setItem(LAST, JSON.stringify({ cart: [...cart], meta: readMeta(), at: Date.now() }));
         localStorage.removeItem(CART); localStorage.removeItem(METAK); cart = [];
         grid.style.display = 'none'; contact.hidden = true; setStep(3);
         successEl.hidden = false;

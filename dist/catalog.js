@@ -96,9 +96,19 @@ const requestItems = document.querySelector('[data-request-items]');
 const renderCart = () => {
   localStorage.setItem('apexwolt-cart', JSON.stringify(cart));
   document.querySelector('[data-cart-count]').textContent = cart.length;
-  requestItems.innerHTML = cart.length
-    ? cart.map((name, index) => `<div class="request-item"><span>${escapeHtml(name)}</span><button type="button" data-remove-item="${index}" aria-label="Удалить">×</button></div>`).join('')
-    : '<p>Добавьте позиции из каталога.</p>';
+  if (cart.length) {
+    requestItems.innerHTML = cart.map((name, index) => `<div class="request-item"><span>${escapeHtml(name)}</span><button type="button" data-remove-item="${index}" aria-label="Удалить">×</button></div>`).join('');
+  } else {
+    let last = null; try { last = JSON.parse(localStorage.getItem('apexwolt-last-order') || 'null'); } catch { last = null; }
+    const n = (last && Array.isArray(last.cart)) ? new Set(last.cart).size : 0;
+    requestItems.innerHTML = '<p>Добавьте позиции из каталога.</p>' + (n ? `<button type="button" class="cart-repeat" data-cart-repeat>↺ Повторить последнюю заявку (${n})</button>` : '');
+    requestItems.querySelector('[data-cart-repeat]')?.addEventListener('click', () => {
+      cart = [...last.cart];
+      if (last.meta) { let m; try { m = JSON.parse(localStorage.getItem('apexwolt-cart-meta') || '{}'); } catch { m = {}; } Object.assign(m, last.meta); localStorage.setItem('apexwolt-cart-meta', JSON.stringify(m)); }
+      renderCart();
+      showToast('Последняя заявка восстановлена');
+    });
+  }
   requestItems.querySelectorAll('[data-remove-item]').forEach(button => button.addEventListener('click', () => {
     cart.splice(Number(button.dataset.removeItem), 1);
     renderCart();

@@ -173,9 +173,27 @@ const setLoaderProgress = value => {
   if (loaderBar) loaderBar.style.width = `${pct}%`;
   if (loaderPct) loaderPct.textContent = `${pct}%`;
 };
+// Сменяющиеся фразы на лоадере (плавное появление/исчезновение из блюра).
+const loaderPhraseEl = document.querySelector('[data-loader-phrase]');
+const loaderPhrases = ['Готовим каталог', 'Подбираем товары именно для вас', 'Настраиваем личный кабинет', 'Собираем лучшие предложения'];
+let loaderPhraseIdx = 0, loaderPhraseTimer = null;
+const cyclePhrase = () => {
+  if (!loaderPhraseEl || loaderHidden) return;
+  loaderPhraseEl.textContent = loaderPhrases[loaderPhraseIdx % loaderPhrases.length];
+  loaderPhraseEl.classList.add('is-visible'); // блюр-появление
+  loaderPhraseTimer = setTimeout(() => {
+    loaderPhraseEl.classList.remove('is-visible'); // блюр-исчезновение
+    loaderPhraseIdx++;
+    loaderPhraseTimer = setTimeout(cyclePhrase, 650); // пауза, пока текст растворяется
+  }, 2000);
+};
+if (loaderPhraseEl && !loaderHidden) cyclePhrase();
+
 const hideLoader = () => {
   if (loaderHidden || !siteLoader) return;
   loaderHidden = true;
+  if (loaderPhraseTimer) { clearTimeout(loaderPhraseTimer); loaderPhraseTimer = null; }
+  if (loaderPhraseEl) loaderPhraseEl.classList.remove('is-visible');
   setLoaderProgress(100);
   siteLoader.classList.add('is-hidden');
   siteLoader.setAttribute('aria-hidden', 'true');

@@ -62,7 +62,9 @@ const toast = document.querySelector('[data-toast]');
 const switcherEl = document.querySelector('[data-category-switcher]');
 let availability = 'all';
 let activeBrand = 'all';
-let view = localStorage.getItem('apexwolt-catalog-view') || 'list';
+// На мобильном по умолчанию — плитка (привычно по маркетплейсам), на десктопе — список.
+// Явный выбор пользователя (localStorage) имеет приоритет.
+let view = localStorage.getItem('apexwolt-catalog-view') || (window.matchMedia('(max-width: 768px)').matches ? 'grid' : 'list');
 
 document.title = `${pageTitle} — APEXWOLT`;
 document.querySelector('[data-page-title]').textContent = pageTitle;

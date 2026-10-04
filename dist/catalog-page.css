@@ -943,7 +943,18 @@
   }
 
   .category-results-head {
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .category-results-head p { align-self: flex-start; }
+
+  .category-results-head .wiz-trigger,
+  .category-results-head .list-order-link {
+    width: 100%;
+    justify-content: center;
+    margin-right: 0;
+    min-height: 44px;
   }
 
   .price-access-note {

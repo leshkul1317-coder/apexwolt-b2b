@@ -7,7 +7,7 @@
   <title>Личный кабинет — APEXWOLT</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=typography-v2" />
-  <link rel="stylesheet" href="account.css?v=5" />
+  <link rel="stylesheet" href="account.css?v=8" />
 </head>
 <body class="account-page">
   <svg class="account-icon-sprite" aria-hidden="true">
@@ -90,7 +90,25 @@
 
       <section class="account-panel" data-account-panel="requests">
         <div class="panel-intro"><div><p>03 / ЗАЯВКИ</p><h2>От черновика<br />до <em>счёта.</em></h2></div><p>Соберите позиции вручную или загрузите список артикулов. Менеджер проверит цены, наличие и сроки поставки.</p></div>
-        <div class="request-board"><article class="request-draft-card"><div class="widget-head"><div><p>ЧЕРНОВИК</p><h3>Текущая заявка</h3></div><span data-request-draft-count>0 позиций</span></div><div class="draft-list" data-request-items><p>Позиции ещё не добавлены.</p></div><div class="request-actions"><a href="catalog.html?category=drills">Добавить из каталога</a><button type="button" data-demo-action="Загрузка Excel">Загрузить Excel</button><button class="is-primary" type="button" data-demo-action="Отправка заявки менеджеру">Отправить менеджеру →</button></div></article><aside class="request-steps"><span>ПРОЦЕСС ЗАЯВКИ</span><ol><li class="is-current"><b>01</b><p>Черновик<small>Товары и количество</small></p></li><li><b>02</b><p>Проверка<small>Цены, остатки и сроки</small></p></li><li><b>03</b><p>Согласование<small>Счёт и доставка</small></p></li><li><b>04</b><p>Заказ<small>Оплата и отгрузка</small></p></li></ol></aside></div>
+        <div class="request-board"><article class="request-draft-card"><div class="widget-head"><div><p>ЧЕРНОВИК</p><h3>Текущая заявка</h3></div><span data-request-draft-count>0 позиций</span></div><div class="draft-list" data-request-items><p>Позиции ещё не добавлены.</p></div><div class="request-actions"><a href="catalog.html">Добавить из каталога</a><button type="button" data-demo-action="Загрузка Excel">Загрузить Excel</button><button class="is-primary" type="button" data-request-open>Отправить менеджеру →</button></div>
+            <div class="kp-block"><span class="kp-block-label">Коммерческое предложение</span><div class="kp-block-btns"><button type="button" class="kp-btn" data-kp-excel><svg class="kp-ico kp-ico--xls" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><path d="m9.5 12.5 5 5M14.5 12.5l-5 5"/></svg>Excel</button><button type="button" class="kp-btn" data-kp-pdf><svg class="kp-ico kp-ico--pdf" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 16h4"/></svg>PDF</button></div></div>
+            <form class="request-form" data-request-form hidden novalidate>
+              <div class="request-form-head"><h3>Оформление заявки</h3><p>Менеджер проверит цены, наличие и сроки и свяжется с вами. Отправка заявки не является заключением договора.</p></div>
+              <div class="request-form-summary" data-request-summary></div>
+              <div class="request-form-grid">
+                <label>Контактное лицо <span class="req">*</span><input type="text" name="name" autocomplete="name" placeholder="Иван Петров" required /></label>
+                <label>Компания<input type="text" name="company" autocomplete="organization" placeholder="ООО «Ромашка»" /></label>
+                <label>ИНН<input type="text" name="inn" inputmode="numeric" placeholder="10 или 12 цифр" /></label>
+                <label>Email<input type="email" name="email" autocomplete="email" placeholder="zakup@company.ru" /></label>
+                <label>Телефон<input type="tel" name="phone" autocomplete="tel" placeholder="+7 900 000-00-00" /></label>
+                <label class="request-field-wide">Комментарий<textarea name="comment" rows="2" placeholder="Сроки, адрес отгрузки, пожелания"></textarea></label>
+              </div>
+              <p class="request-form-hint">Укажите компанию или ИНН и хотя бы один способ связи — email или телефон.</p>
+              <label class="request-consent"><input type="checkbox" name="consent" /> <span>Согласен на обработку персональных данных в соответствии с <a href="consent-personal-data.html" target="_blank" rel="noopener">152-ФЗ</a> и <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span></label>
+              <div class="request-form-actions"><button type="button" data-request-cancel>Отмена</button><button type="submit" class="is-primary" data-request-submit>Отправить заявку →</button></div>
+              <div class="request-feedback" data-request-feedback hidden></div>
+            </form>
+            <div class="request-success" data-request-success hidden></div></article><aside class="request-steps"><span>ПРОЦЕСС ЗАЯВКИ</span><ol><li class="is-current"><b>01</b><p>Черновик<small>Товары и количество</small></p></li><li><b>02</b><p>Проверка<small>Цены, остатки и сроки</small></p></li><li><b>03</b><p>Согласование<small>Счёт и доставка</small></p></li><li><b>04</b><p>Заказ<small>Оплата и отгрузка</small></p></li></ol></aside></div>
       </section>
 
       <section class="account-panel" data-account-panel="orders">
@@ -133,6 +151,8 @@
   </main>
 
   <div class="account-toast" data-account-toast role="status"></div>
-  <script src="account.js?v=2"></script>
+  <script src="account.js?v=5"></script>
+  <script src="assets/vendor/qrcode.min.js"></script>
+  <script src="kp.js?v=3"></script>
 </body>
 </html>

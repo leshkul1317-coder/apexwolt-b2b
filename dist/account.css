@@ -271,3 +271,85 @@
   .manager-channels article{ grid-template-columns:auto 1fr; }
   .manager-channels button{ grid-column:2; justify-self:start; }
 }
+
+/* ---------- Форма заявки на закупку ---------- */
+.request-form { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--account-line); display: grid; gap: 16px; }
+.request-form[hidden] { display: none; }
+.request-form-head h3 { margin: 0 0 4px; font-size: 15px; letter-spacing: -.03em; }
+.request-form-head p { margin: 0; color: var(--account-muted); font-size: 10px; line-height: 1.5; }
+
+.request-form-summary { display: grid; gap: 6px; }
+.rq-empty { margin: 0; color: #92969e; font-size: 11px; }
+.rq-item { display: grid; grid-template-columns: 20px 46px minmax(0, 1fr) auto auto; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--account-line); border-radius: 14px; background: rgba(255, 255, 255, .6); }
+.rq-num { align-self: start; color: #9a9ea6; font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.rq-thumb { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 11px; background: rgba(16, 17, 20, .04); overflow: hidden; }
+.rq-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.rq-item-main { min-width: 0; display: grid; gap: 2px; }
+.rq-item-main b { font-size: 11px; font-weight: 650; line-height: 1.3; }
+.rq-item-main small { color: var(--account-muted); font-size: 9px; }
+.rq-brand { justify-self: start; padding: 2px 7px; border-radius: 999px; background: rgba(16, 17, 20, .06); color: #3b3e44; font-size: 8px; font-weight: 760; letter-spacing: .05em; text-transform: uppercase; }
+.rq-qty { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--account-line); border-radius: 10px; overflow: hidden; background: #fff; }
+.rq-step { width: 30px; min-height: 34px; border: 0; background: #fff; color: #3b3e44; font-size: 16px; line-height: 1; cursor: pointer; transition: background .15s ease; }
+.rq-step:hover { background: rgba(16, 17, 20, .05); }
+.rq-step:active { background: rgba(47, 99, 255, .1); color: var(--account-blue); }
+.rq-qty input { width: 44px; min-height: 34px; padding: 0 4px; border: 0; border-left: 1px solid var(--account-line); border-right: 1px solid var(--account-line); background: #fff; font-size: 12px; font-weight: 600; text-align: center; -moz-appearance: textfield; }
+.rq-qty input::-webkit-outer-spin-button, .rq-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.rq-price { color: #43464c; font-size: 10px; white-space: nowrap; }
+.rq-total { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; padding: 12px; border-radius: 12px; background: rgba(47, 99, 255, .06); }
+.rq-total span { color: var(--account-muted); font-size: 10px; }
+.rq-total b { font-size: 14px; letter-spacing: -.02em; }
+
+.request-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.request-form-grid label { display: grid; gap: 5px; color: #4a4e56; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.request-form-grid .req { color: var(--account-blue); }
+.request-field-wide { grid-column: 1 / -1; }
+.request-form-grid input, .request-form-grid textarea { min-height: 40px; padding: 10px 12px; border: 1px solid var(--account-line); border-radius: 10px; background: #fff; color: var(--account-ink); font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; font-family: inherit; }
+.request-form-grid textarea { min-height: 56px; resize: vertical; }
+.request-form-grid input:focus, .request-form-grid textarea:focus { outline: none; border-color: var(--account-blue); box-shadow: 0 0 0 3px rgba(47, 99, 255, .12); }
+.request-form-hint { margin: -4px 0 0; color: var(--account-muted); font-size: 9px; }
+
+.request-consent { display: flex; align-items: flex-start; gap: 9px; color: #4a4e56; font-size: 10px; line-height: 1.45; }
+.request-consent input { margin-top: 1px; width: 16px; height: 16px; accent-color: var(--account-blue); flex: none; }
+.request-consent a { color: var(--account-blue); }
+
+.request-form-actions { display: flex; align-items: center; gap: 8px; }
+.request-form-actions button { min-height: 42px; padding: 0 16px; border: 1px solid var(--account-line); border-radius: 10px; background: #fff; font-size: 10px; font-weight: 720; cursor: pointer; }
+.request-form-actions .is-primary { margin-left: auto; border-color: var(--account-blue); background: var(--account-blue); color: #fff; box-shadow: 0 14px 28px rgba(47, 99, 255, .2); }
+.request-form-actions .is-primary:disabled { opacity: .6; cursor: default; box-shadow: none; }
+
+.request-feedback { margin: 0; padding: 11px 13px; border-radius: 10px; font-size: 10px; line-height: 1.45; }
+.request-feedback[hidden] { display: none; }
+.request-feedback.is-error { background: rgba(197, 48, 48, .08); color: #b23b3b; }
+
+.request-success { display: flex; align-items: center; gap: 14px; margin-top: 20px; padding: 18px 20px; border: 1px solid rgba(31, 157, 85, .2); border-radius: 16px; background: rgba(31, 157, 85, .06); }
+.request-success[hidden] { display: none; }
+.rq-success-mark { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 50%; background: #1f9d55; color: #fff; font-size: 18px; }
+.request-success h3 { margin: 0 0 3px; font-size: 14px; letter-spacing: -.02em; }
+.request-success p { margin: 0; color: #4a4e56; font-size: 10px; line-height: 1.5; }
+
+@media (max-width: 860px) {
+  .request-form-grid { grid-template-columns: 1fr; }
+  .rq-item { grid-template-columns: 1fr auto; }
+  .rq-price { grid-column: 1 / -1; }
+}
+
+/* ---------- Кнопки «Коммерческое предложение» (стеклянные) ---------- */
+.kp-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--account-line); }
+.kp-block-label { display: block; margin-bottom: 8px; color: #8a8e96; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.kp-block-btns { display: flex; gap: 8px; }
+.kp-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px; flex: 1;
+  min-height: 42px; padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, .8); border-radius: 12px;
+  background: rgba(255, 255, 255, .62);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 10px 26px rgba(28, 35, 48, .06), inset 0 1px 0 #fff;
+  color: #2b2e33; font-size: 11px; font-weight: 700; cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.kp-btn:hover { transform: translateY(-1px); border-color: #fff; box-shadow: 0 14px 32px rgba(28, 35, 48, .1), inset 0 1px 0 #fff; }
+.kp-btn:active { transform: translateY(0); }
+.kp-btn:disabled { opacity: .6; cursor: default; transform: none; }
+.kp-ico { width: 17px; height: 17px; flex: none; }
+.kp-ico--xls { color: #1f9d55; }
+.kp-ico--pdf { color: #e0484b; }

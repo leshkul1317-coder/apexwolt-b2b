@@ -3,3 +3,8 @@
 
 # Внутренняя матрица цен (себестоимость) — не в репозиторий
 catalog-tools/*.xlsx
+
+# Backend: персональные данные заявок и зависимости — не в репозиторий
+backend/data/
+backend/node_modules/
+node_modules/

@@ -13,7 +13,7 @@ APEXWOLT B2B — импортёр каталога из Excel «Матрица �
 Себестоимость НИКОГДА не публикуется. Цена партнёра / средняя МП — опциональны,
 пока не заполнены в Excel, показываются как «после авторизации» / «нет данных».
 """
-import openpyxl, re, sys, io, os, json, html
+import openpyxl, re, sys, io, os, json, html, datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.normpath(os.path.join(ROOT, "..", "dist"))
@@ -38,10 +38,10 @@ HEADER_MAP = {
     "комплектация": "kit",
     "штрихкод": "barcode",
     "наличие товара": "stock_text",
-    "цена партнёра": "partner",
-    "цена партнера": "partner",
+    # «Цена партнёра базовая» = себестоимость × коэффициент клиента — ВНУТРЕННЕЕ,
+    # НЕ читаем в публичный JS (считается на бэкенде после авторизации). Поэтому не маппим.
     "средняя цена на мп": "mp",
-    "срок поставки, дней": "lead_days",
+    "срок поставки, дней": "lead_days",  # для «в пути» тут ДАТА поступления; срок отгрузки — базово 5 дней
 }
 
 def norm(s):
@@ -309,13 +309,25 @@ def parse_specs(v):
     if not v: return []
     return [s.strip() for s in str(v).replace("\r", "\n").split("\n") if s.strip()]
 
+BASE_LEAD_DAYS = 5  # базовый срок отгрузки для всех (заказчик; позже — настраиваемо под регион/клиента)
+
+def _parse_eta(v):
+    """Ожидаемая дата поступления для «в пути». В матрице колонка «Срок поставки, дней»
+    для таких позиций содержит ДАТУ (datetime или 'YYYY-MM-DD ...'). Возвращаем 'ДД.ММ.ГГГГ'."""
+    if v in (None, ""):
+        return ""
+    if isinstance(v, (datetime.datetime, datetime.date)):
+        return v.strftime("%d.%m.%Y")
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", str(v).strip())
+    return f"{m.group(3)}.{m.group(2)}.{m.group(1)}" if m else ""
+
 def stock_lead(p):
+    """-> (stock, lead_days, eta). stock: 1 в наличии / 0 в пути; lead — базовый срок отгрузки;
+    eta — ожидаемая дата поступления (только для «в пути»)."""
     st = norm(p.get("stock_text"))
-    lead_days = to_num(p.get("lead_days"))
-    if st.startswith("в наличии"):
-        return 1, 0
-    # «в пути» / прочее — нет на складе; срок = число дней, если задано, иначе None (уточняется)
-    return 0, (int(lead_days) if isinstance(lead_days, (int, float)) else None)
+    stock = 1 if st.startswith("в наличии") else 0
+    eta = "" if stock else _parse_eta(p.get("lead_days"))
+    return stock, BASE_LEAD_DAYS, eta
 
 def jss(s):
     """JS-строка в одинарных кавычках."""
@@ -337,16 +349,16 @@ def generate(products):
         while pid in seen_ids:
             pid = f"{base_id}-{n}"; n += 1
         seen_ids.add(pid)
-        stock, lead = stock_lead(p)
+        stock, lead, eta = stock_lead(p)
         # per-product фото (вырезка), если конвейер уже положил файл assets/catalog/{id}.png
         prod_img = ""
         if os.path.exists(os.path.join(PRODUCT_PHOTO_DIR, pid + ".png")):
             prod_img = f"assets/catalog/{pid}.png"
         variant = [
             pid, code, p.get("name") or "", stock, lead, to_num(p.get("price")),
-            parse_specs(p.get("specs")), brand, to_num(p.get("partner")), to_num(p.get("mp")),
-            (p.get("desc") or "").strip(), prod_img,
-        ]
+            parse_specs(p.get("specs")), brand, None, to_num(p.get("mp")),
+            (p.get("desc") or "").strip(), prod_img, eta,
+        ]  # [8]=partner всегда null в публичном JS (себестоимость не выгружается); [12]=eta
         categories.setdefault(ckey, {"title": p["category"], "image": image_for_category(ckey), "variants": []})
         categories[ckey]["variants"].append(variant)
         sec = sections.setdefault(dkey, {"title": d, "description": DIRECTION_DESC.get(d, ""), "categories": []})
@@ -374,9 +386,8 @@ def generate(products):
             specs = "[" + ", ".join(jss(s) for s in v[6]) + "]"
             price = "null" if v[5] is None else repr(v[5])
             lead = "null" if v[4] is None else str(v[4])
-            partner = "null" if v[8] is None else repr(v[8])
             mp = "null" if v[9] is None else repr(v[9])
-            out.write(f"      [{jss(v[0])}, {jss(v[1])}, {jss(v[2])}, {v[3]}, {lead}, {price}, {specs}, {jss(v[7])}, {partner}, {mp}, {jss(v[10])}, {jss(v[11])}],\n")
+            out.write(f"      [{jss(v[0])}, {jss(v[1])}, {jss(v[2])}, {v[3]}, {lead}, {price}, {specs}, {jss(v[7])}, null, {mp}, {jss(v[10])}, {jss(v[11])}, {jss(v[12])}],\n")
         out.write("    ]\n  },\n")
     out.write("};\n\n")
     out.write("const sectionData = {\n")
@@ -406,6 +417,15 @@ def generate_home_cards(products):
         c = s["cats"].setdefault(ckey, {"title": p["category"], "count": 0})
         c["count"] += 1
         if ckey not in s["order"]: s["order"].append(ckey)
+    # Представительное фото категории для ховер-превью. Приоритет: чистая вырезка
+    # категории (красивее), иначе первое per-product фото товара. Логотип НЕ берём.
+    cat_imgs = dict(CATEGORY_IMAGE)
+    for p in products:
+        ck = p["category_key"]
+        if ck in cat_imgs: continue
+        pid = slugify(f"{p.get('brand','')}-{p.get('code','')}")
+        if os.path.exists(os.path.join(PRODUCT_PHOTO_DIR, pid + ".png")):
+            cat_imgs[ck] = f"assets/catalog/{pid}.png"
     e = html.escape
     cards = []
     num = 0
@@ -423,7 +443,8 @@ def generate_home_cards(products):
             subs = [f'<a class="cc-sub cc-sub-all" href="catalog?section={dkey}"><span class="cc-sub-label">Все позиции направления</span><span class="cc-sub-count">{npos}</span></a>']
             for ck in s["order"]:
                 c = s["cats"][ck]
-                subs.append(f'<a class="cc-sub" href="catalog?category={ck}"><span class="cc-sub-label">{e(c["title"])}</span><span class="cc-sub-count">{c["count"]}</span></a>')
+                di = f' data-img="{e(cat_imgs[ck])}"' if cat_imgs.get(ck) else ''
+                subs.append(f'<a class="cc-sub"{di} href="catalog?category={ck}"><span class="cc-sub-label">{e(c["title"])}</span><span class="cc-sub-count">{c["count"]}</span></a>')
             meta = f'{ncat} {ru_plural(ncat,"категория","категории","категорий")} · {npos} {ru_plural(npos,"позиция","позиции","позиций")}'
             card = (
                 f'<div class="category-card has-flyout" data-section="{dkey}">'

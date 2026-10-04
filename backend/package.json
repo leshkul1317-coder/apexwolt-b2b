@@ -1,0 +1,10 @@
+{
+  "name": "apexwolt-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "APEXWOLT B2B — backend-функции (заявка на закупку и др.)",
+  "main": "handler.js",
+  "scripts": {
+    "dev": "node local-server.js"
+  }
+}

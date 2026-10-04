@@ -9,12 +9,14 @@ let activeCollection = 'favorites';
 const richUI = document.body.classList.contains('catalog-page');
 const esc = value => String(value ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const money = value => Number(value) > 0 ? `${Number(value).toLocaleString('ru-RU')} ₽` : null;
-const writeCartMeta = (name, meta) => {
+// function-декларация (не const): catalog.js тоже объявляет writeCartMeta,
+// а классические скрипты делят лексическую область — два top-level const = SyntaxError.
+function writeCartMeta(name, meta) {
   if (!name || !meta) return;
   let m; try { m = JSON.parse(localStorage.getItem('apexwolt-cart-meta') || '{}'); } catch { m = {}; }
   m[name] = { code: meta.code || '', brand: meta.brand || '', mrc: meta.mrc || '', image: meta.image || '' };
   localStorage.setItem('apexwolt-cart-meta', JSON.stringify(m));
-};
+}
 const addToRequest = (name, meta) => {
   if (window.apexAddToCart) { window.apexAddToCart(name, meta); return; }
   let c; try { c = JSON.parse(localStorage.getItem('apexwolt-cart') || '[]'); } catch { c = []; }

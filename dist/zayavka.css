@@ -1,0 +1,141 @@
+/* APEXWOLT B2B — страница заявки (корзина). Чистый премиальный стиль:
+   воздух, тонкие разделители, круглые степперы, правая колонка «Сводка». */
+
+.zayavka-page { background: #fff; }
+.zayavka-page .site-header { background: rgba(255, 255, 255, .82); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, .7); border-radius: 20px; padding: 9px 16px; box-shadow: 0 14px 36px rgba(22, 25, 31, .09), inset 0 1px 0 #fff; }
+
+.zv { max-width: 1180px; margin: 0 auto; padding: 104px clamp(20px, 6vw, 72px) 120px; }
+
+/* Шапка страницы: назад + шаги */
+.zv-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+.zv-back { display: inline-flex; align-items: center; gap: 7px; color: #6a6e76; font-size: 12px; font-weight: 600; text-decoration: none; transition: color .2s ease; }
+.zv-back:hover { color: var(--accent-blue, #2f63ff); }
+.zv-back span { font-size: 15px; }
+.zv-steps { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+.zv-steps li { display: inline-flex; align-items: center; gap: 8px; color: #abaeb4; font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+.zv-steps li b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1px solid currentColor; font-size: 10px; }
+.zv-steps li.is-current { color: #101114; }
+.zv-steps li.is-current b { border-color: var(--accent-blue, #2f63ff); background: var(--accent-blue, #2f63ff); color: #fff; }
+.zv-steps li.is-done { color: #1f9d55; }
+.zv-steps li.is-done b { border-color: #1f9d55; background: #1f9d55; color: #fff; }
+
+/* Сетка: позиции слева, сводка справа */
+.zv-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 48px; align-items: start; }
+.zv-title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid rgba(16, 17, 20, .1); }
+.zv-title h1 { margin: 0; font-size: clamp(30px, 5vw, 44px); letter-spacing: -.04em; }
+.zv-title span { color: #8a8e96; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Позиция */
+.zv-item { display: grid; grid-template-columns: 18px 72px minmax(0, 1fr) auto auto 24px; align-items: center; gap: 18px; padding: 22px 0; border-bottom: 1px solid rgba(16, 17, 20, .08); }
+.zv-num { align-self: center; color: #b6b9bf; font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.zv-thumb { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 14px; background: rgba(16, 17, 20, .035); overflow: hidden; }
+.zv-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.zv-item-info { min-width: 0; display: grid; gap: 3px; }
+.zv-brand { justify-self: start; padding: 2px 8px; border-radius: 999px; background: rgba(16, 17, 20, .06); color: #3b3e44; font-size: 8px; font-weight: 760; letter-spacing: .06em; text-transform: uppercase; }
+.zv-name { font-size: 13.5px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; }
+.zv-meta { color: #8a8e96; font-size: 10px; }
+.zv-avail { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; }
+.zv-avail::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.zv-avail.is-in { color: #1f9d55; }
+.zv-avail.is-out { color: #b98326; }
+
+/* Количество — круглые степперы */
+.zv-qty { display: inline-flex; align-items: center; gap: 10px; }
+.zv-step { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid rgba(16, 17, 20, .16); border-radius: 50%; background: #fff; color: #3b3e44; font-size: 16px; line-height: 1; cursor: pointer; transition: border-color .18s ease, color .18s ease, transform .1s ease; }
+.zv-step:hover { border-color: var(--accent-blue, #2f63ff); color: var(--accent-blue, #2f63ff); }
+.zv-step:active { transform: scale(.92); }
+.zv-qty input { width: 40px; border: 0; background: transparent; font-size: 14px; font-weight: 600; text-align: center; -moz-appearance: textfield; color: #101114; }
+.zv-qty input::-webkit-outer-spin-button, .zv-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.zv-price { text-align: right; display: grid; gap: 1px; white-space: nowrap; }
+.zv-price b { font-size: 14px; font-weight: 700; letter-spacing: -.01em; }
+.zv-price small { color: #9a9ea6; font-size: 9px; }
+.zv-remove { border: 0; background: transparent; color: #c2c5cb; font-size: 18px; line-height: 1; cursor: pointer; transition: color .18s ease; }
+.zv-remove:hover { color: #d2544f; }
+
+.zv-empty { margin: 40px 0; color: #8a8e96; font-size: 13px; }
+.zv-empty a { color: var(--accent-blue, #2f63ff); }
+
+/* Рекомендуем с этим товаром */
+.zv-reco { margin-top: 46px; }
+.zv-reco h2 { margin: 0 0 18px; font-size: 17px; letter-spacing: -.02em; }
+.zv-reco-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.zv-reco-card { display: flex; flex-direction: column; gap: 8px; padding: 14px; border: 1px solid rgba(16, 17, 20, .07); border-radius: 16px; background: rgba(255, 255, 255, .7); box-shadow: 0 12px 30px rgba(22, 25, 31, .04), inset 0 1px 0 #fff; transition: transform .2s ease, box-shadow .2s ease; }
+.zv-reco-card:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(22, 25, 31, .08), inset 0 1px 0 #fff; }
+.zv-reco-thumb { display: grid; place-items: center; height: 92px; border-radius: 10px; background: rgba(16, 17, 20, .03); overflow: hidden; }
+.zv-reco-thumb img { max-width: 100%; max-height: 92px; object-fit: contain; }
+.zv-reco-card b { font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 28px; }
+.zv-reco-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.zv-reco-price { font-size: 12px; font-weight: 700; }
+.zv-reco-add { border: 1px solid rgba(47, 99, 255, .3); background: rgba(47, 99, 255, .07); color: var(--accent-blue, #2f63ff); border-radius: 8px; padding: 6px 9px; font-size: 9px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background .18s ease; }
+.zv-reco-add:hover { background: rgba(47, 99, 255, .14); }
+
+/* Сводка (правая колонка) */
+.zv-summary { position: sticky; top: 100px; padding: 24px; border: 1px solid rgba(255, 255, 255, .8); border-radius: 20px; background: rgba(255, 255, 255, .62); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: 0 22px 54px rgba(22, 25, 31, .08), inset 0 1px 0 #fff; }
+.zv-summary h2 { margin: 0 0 16px; font-size: 16px; letter-spacing: -.02em; }
+.zv-sum-rows { display: grid; gap: 10px; }
+.zv-sum-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 12px; color: #5a5e66; }
+.zv-sum-row b { color: #101114; font-weight: 600; font-variant-numeric: tabular-nums; }
+.zv-sum-total { margin-top: 6px; padding-top: 12px; border-top: 1px solid rgba(16, 17, 20, .12); font-size: 13px; color: #101114; }
+.zv-sum-total b { font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.zv-sum-vat { margin-top: 4px; text-align: right; color: #9a9ea6; font-size: 10px; font-variant-numeric: tabular-nums; }
+.zv-sum-note { margin: 12px 0 0; color: #9a9ea6; font-size: 9.5px; line-height: 1.5; }
+.zv-checkout { width: 100%; min-height: 50px; margin-top: 16px; border: 0; border-radius: 13px; background: #101114; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .01em; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background .2s ease, transform .15s ease; }
+.zv-checkout:hover { background: var(--accent-blue, #2f63ff); transform: translateY(-1px); }
+.zv-summary .kp-block { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(16, 17, 20, .08); }
+.zv-sum-foot { margin: 14px 0 0; color: #9a9ea6; font-size: 9px; line-height: 1.5; }
+
+/* Контактная форма (шаг 2) */
+.zv-contact { margin-top: 36px; }
+.zv-contact-inner { max-width: 760px; margin: 0 auto; padding: 28px clamp(18px, 4vw, 34px); border: 1px solid rgba(16, 17, 20, .08); border-radius: 22px; background: rgba(255, 255, 255, .7); box-shadow: 0 22px 54px rgba(22, 25, 31, .06), inset 0 1px 0 #fff; }
+.zv-contact-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.zv-contact-head h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+.zv-contact-back { border: 0; background: transparent; color: #6a6e76; font-size: 11px; font-weight: 600; cursor: pointer; }
+.zv-contact-back:hover { color: var(--accent-blue, #2f63ff); }
+
+/* форма переиспользует стили .request-* из account.css? нет — задаём здесь компактно */
+.request-form.is-page { display: grid; gap: 16px; }
+.request-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.request-form-grid label { display: grid; gap: 5px; color: #4a4e56; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.request-form-grid .req { color: var(--accent-blue, #2f63ff); }
+.request-field-wide { grid-column: 1 / -1; }
+.request-form-grid input, .request-form-grid textarea { min-height: 42px; padding: 11px 13px; border: 1px solid rgba(16, 17, 20, .12); border-radius: 11px; background: #fff; color: #101114; font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; font-family: inherit; }
+.request-form-grid textarea { min-height: 58px; resize: vertical; }
+.request-form-grid input:focus, .request-form-grid textarea:focus { outline: none; border-color: var(--accent-blue, #2f63ff); box-shadow: 0 0 0 3px rgba(47, 99, 255, .12); }
+.request-form-hint { margin: -4px 0 0; color: #9a9ea6; font-size: 10px; }
+.request-consent { display: flex; align-items: flex-start; gap: 9px; color: #4a4e56; font-size: 11px; line-height: 1.45; }
+.request-consent input { margin-top: 1px; width: 16px; height: 16px; accent-color: var(--accent-blue, #2f63ff); flex: none; }
+.request-consent a { color: var(--accent-blue, #2f63ff); }
+.request-form-actions { display: flex; justify-content: flex-end; }
+.request-form-actions .is-primary { min-height: 48px; padding: 0 22px; border: 0; border-radius: 12px; background: var(--accent-blue, #2f63ff); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 16px 32px rgba(47, 99, 255, .22); transition: background .2s ease, transform .15s ease; }
+.request-form-actions .is-primary:hover { background: #1f49d6; transform: translateY(-1px); }
+.request-form-actions .is-primary:disabled { opacity: .6; cursor: default; box-shadow: none; }
+.request-feedback { margin: 0; padding: 11px 13px; border-radius: 10px; font-size: 11px; line-height: 1.45; }
+.request-feedback[hidden] { display: none; }
+.request-feedback.is-error { background: rgba(197, 48, 48, .08); color: #b23b3b; }
+
+/* Успех */
+.zv-success { margin-top: 24px; }
+.zv-success-inner { max-width: 620px; margin: 40px auto; padding: 40px 32px; text-align: center; border: 1px solid rgba(31, 157, 85, .2); border-radius: 24px; background: rgba(31, 157, 85, .05); }
+.zv-success-mark { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; background: #1f9d55; color: #fff; font-size: 28px; }
+.zv-success-inner h2 { margin: 0 0 8px; font-size: 24px; letter-spacing: -.02em; }
+.zv-success-inner p { margin: 0; color: #4a4e56; font-size: 13px; line-height: 1.55; }
+.zv-success-link { display: inline-block; margin-top: 20px; color: var(--accent-blue, #2f63ff); font-size: 13px; font-weight: 700; }
+
+/* Адаптив */
+@media (max-width: 960px) {
+  .zv-grid { grid-template-columns: 1fr; gap: 28px; }
+  .zv-summary { position: static; order: 2; }
+  .zv-reco-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 680px) {
+  .zv { padding-top: 92px; }
+  .zv-item { grid-template-columns: 16px 56px minmax(0, 1fr) auto; grid-template-areas: "num thumb info remove" "num thumb qty price"; gap: 10px 14px; row-gap: 12px; }
+  .zv-num { grid-area: num; } .zv-thumb { grid-area: thumb; width: 56px; height: 56px; } .zv-item-info { grid-area: info; } .zv-remove { grid-area: remove; justify-self: end; }
+  .zv-qty { grid-area: qty; } .zv-price { grid-area: price; justify-self: end; align-self: center; }
+  .request-form-grid { grid-template-columns: 1fr; }
+  .zv-reco-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Маркетинговое согласие — мягкая метка, по умолчанию НЕ отмечена (152-ФЗ / ФЗ «О рекламе») */
+.request-consent--soft { color: #6a6e76; font-size: 10.5px; }

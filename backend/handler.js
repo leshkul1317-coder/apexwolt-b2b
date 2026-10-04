@@ -58,6 +58,8 @@ async function processRequest(payload) {
       email: payload.contact.email ? String(payload.contact.email).trim() : '',
       phone: payload.contact.phone ? String(payload.contact.phone).trim() : '',
       comment: payload.contact.comment ? String(payload.contact.comment).trim().slice(0, 2000) : '',
+      consent: !!payload.contact.consent,            // согласие 152-ФЗ (обязательно)
+      marketing: !!payload.contact.marketing,        // согласие на рассылки (добровольно, opt-in)
     },
     items: payload.items.map(it => ({
       name: String(it.name || '').slice(0, 300),

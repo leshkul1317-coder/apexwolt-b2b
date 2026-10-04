@@ -49,6 +49,7 @@ function formatEmail(record) {
     c.email ? `  Email: ${c.email}` : null,
     c.phone ? `  Телефон: ${c.phone}` : null,
     c.comment ? `  Комментарий: ${c.comment}` : null,
+    `  Согласие на рассылки: ${c.marketing ? 'да' : 'нет'}`,
     '',
     `ПОЗИЦИИ (${record.items.length}):`,
     ...itemLines,

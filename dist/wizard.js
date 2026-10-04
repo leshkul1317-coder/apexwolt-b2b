@@ -23,14 +23,14 @@
 
   // иконки задач (единый stroke-стиль)
   const ic = {
-    drill: '<path d="M3 8h9v5H6l-1 3H3zM12 9h4l3-2v6l-3-2h-4"/>',
-    wrench: '<path d="M14 7a3.5 3.5 0 1 0 3.3 4.6L21 15l-2 2-3.4-3.4A3.5 3.5 0 0 1 10.5 10l2.5.6L14 7z"/>',
-    concrete: '<path d="M4 20h10M5 16l6-9M8 18l6-9M12 4l2.5 1.5M11 7l5 3 2-3-5-3z"/>',
-    cut: '<circle cx="7" cy="12" r="3.2"/><path d="M9.5 10.5 20 5M9.8 13.2 20 18"/>',
-    sand: '<rect x="4" y="5" width="16" height="9" rx="1.5"/><path d="M7 18h10M8 21h8"/>',
-    measure: '<path d="M3 7h18v10H3zM7 7v3M11 7v4M15 7v3M19 7v4"/>',
-    garden: '<path d="M12 21c0-6 3-10 8-11-1 6-4 9-8 11zM12 21c0-5-2.5-8-7-9 1 5 3 7.5 7 9z"/>',
-    energy: '<path d="M13 3 4 14h6l-1 7 9-11h-6z"/>'
+    drill: '<path d="M3 8.5h7.5v4H3z"/><path d="M10.5 9.6h3.6l3.9-1.1v4.2l-3.9-1.1h-3.6"/><path d="M5.3 12.5v3.6h3.2v-3.6"/>',
+    wrench: '<path d="M8.3 3.6h7.4l3.7 8-3.7 8H8.3l-3.7-8z"/><circle cx="12" cy="11.6" r="3"/>',
+    concrete: '<path d="M9.4 3h5.2v6.2H9.4z"/><path d="M12 9.2v3.6"/><path d="M8.8 12.8h6.4l-3.2 7.2z"/>',
+    cut: '<circle cx="12" cy="12" r="6.6"/><circle cx="12" cy="12" r="1.7"/><path d="M12 2.6v2.8M12 18.6v2.8M2.6 12h2.8M18.6 12h2.8M5.3 5.3l2 2M16.7 16.7l2 2M18.7 5.3l-2 2M7.3 16.7l-2 2"/>',
+    sand: '<rect x="4" y="6" width="16" height="12" rx="1.6"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+    measure: '<rect x="3" y="8" width="18" height="8" rx="1.4"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/>',
+    garden: '<path d="M11.5 21c0-6.3 3.6-10.8 9.2-11.3-.3 6.2-3.6 10.3-9.2 11.3z"/><path d="M11.5 21c-2-5.1-5.1-7.7-8.2-8.2 1 4.6 3.6 7.2 8.2 8.2z"/>',
+    energy: '<path d="M13.2 2.5 5 13.6h5.6L9.2 21.5 19 10.2h-5.6z"/>'
   };
 
   const tasks = [

@@ -6,7 +6,7 @@ const sectionFilmStops = [
   { selector: '.service-intro', time: 6.16 },
   { selector: '.partner-support', time: 9.20 },
   { selector: '#platform', time: 9.20 },
-  { selector: '.video-reviews', time: 12.24 },
+  { selector: '.video-reviews', time: 12.50 },
   { selector: '#account', time: 17.30, widen: .2 },
   { selector: '#contacts', time: 20.10, arrive: .8, widen: .1 }
 ];
@@ -363,8 +363,17 @@ checkoutFilm?.addEventListener('timeupdate', () => { if (checkoutFilm.currentTim
 document.querySelectorAll('[data-cart-open]').forEach(button => button.addEventListener('click', () => setDrawer(true)));
 document.querySelectorAll('[data-cart-close]').forEach(button => button.addEventListener('click', () => setDrawer(false)));
 document.querySelectorAll('[data-add-product]').forEach(button => button.addEventListener('click', () => { cart.push(button.dataset.addProduct); renderCart(); toast.textContent = 'Позиция добавлена в заявку'; toast.classList.add('is-visible'); window.setTimeout(() => toast.classList.remove('is-visible'), 1800); }));
-document.querySelector('[data-send-request]')?.addEventListener('click', () => { if (!cart.length) return; startCheckout(); });
+document.querySelector('[data-send-request]')?.addEventListener('click', () => {
+  if (!cart.length) {
+    toast.textContent = 'Заявка пуста — добавьте позиции из каталога.';
+    toast.classList.add('is-visible');
+    window.setTimeout(() => toast.classList.remove('is-visible'), 2400);
+    return;
+  }
+  startCheckout();
+});
 document.querySelector('[data-checkout-reset]')?.addEventListener('click', resetCheckout);
+renderCart(); // синхронизируем ящик заявки с сохранённой корзиной при загрузке
 document.querySelectorAll('[data-demo-action]').forEach(button => button.addEventListener('click', () => { toast.textContent = `${button.dataset.demoAction}: подключим в личном кабинете`; toast.classList.add('is-visible'); window.setTimeout(() => toast.classList.remove('is-visible'), 2200); }));
 
 const workflow = document.querySelector('[data-workflow]');

@@ -197,6 +197,33 @@
   el('[data-zv-checkout]')?.addEventListener('click', gotoContact);
   el('[data-zv-contact-back]')?.addEventListener('click', () => { contact.hidden = true; setStep(1); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
+  // ---- маски ввода: телефон (+7 зафиксирован, 10 цифр) и ИНН (только цифры, 10/12) ----
+  const phoneInput = form?.querySelector('input[name="phone"]');
+  const innInput = form?.querySelector('input[name="inn"]');
+  const nationalDigits = raw => {
+    let d = String(raw).replace(/\D/g, '');
+    if (d[0] === '7' || d[0] === '8') d = d.slice(1); // убираем код страны / 8 (перед национальными цифрами стоит +7)
+    return d.slice(0, 10);
+  };
+  const formatPhone = d => {
+    let out = '+7';
+    if (d.length) out += ' ' + d.slice(0, 3);
+    if (d.length > 3) out += ' ' + d.slice(3, 6);
+    if (d.length > 6) out += '-' + d.slice(6, 8);
+    if (d.length > 8) out += '-' + d.slice(8, 10);
+    return out;
+  };
+  if (phoneInput) {
+    const ensurePrefix = () => { if (!phoneInput.value.trim()) phoneInput.value = '+7 '; };
+    phoneInput.addEventListener('focus', ensurePrefix);
+    phoneInput.addEventListener('input', () => { phoneInput.value = formatPhone(nationalDigits(phoneInput.value)); });
+    phoneInput.addEventListener('blur', () => { if (!nationalDigits(phoneInput.value).length) phoneInput.value = ''; });
+  }
+  if (innInput) {
+    innInput.setAttribute('maxlength', '12');
+    innInput.addEventListener('input', () => { innInput.value = innInput.value.replace(/\D/g, '').slice(0, 12); });
+  }
+
   const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
   const ENDPOINT = window.APEXWOLT_REQUEST_ENDPOINT || (isLocal ? 'http://localhost:8787/request' : '/api/request');
   const setFeedback = (m, t = 'error') => { if (!feedback) return; feedback.textContent = m || ''; feedback.className = `request-feedback is-${t}`; feedback.hidden = !m; };
@@ -215,6 +242,10 @@
       consent: fd.get('consent') === 'on',
       marketing: fd.get('marketing') === 'on'
     };
+    // телефон: оставляем только если введены все 10 цифр, иначе считаем пустым
+    const phoneDigits = nationalDigits(contactData.phone);
+    const phoneFilled = phoneDigits.length === 10;
+    if (!phoneFilled) contactData.phone = '';
     const errs = [];
     if (contactData.name.length < 2) errs.push('контактное лицо');
     if (!contactData.company && !contactData.inn) errs.push('компанию или ИНН');

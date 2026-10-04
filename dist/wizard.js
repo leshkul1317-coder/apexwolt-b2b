@@ -23,13 +23,13 @@
 
   // иконки задач (единый stroke-стиль)
   const ic = {
-    drill: '<path d="M3 8.5h7.5v4H3z"/><path d="M10.5 9.6h3.6l3.9-1.1v4.2l-3.9-1.1h-3.6"/><path d="M5.3 12.5v3.6h3.2v-3.6"/>',
-    wrench: '<path d="M8.3 3.6h7.4l3.7 8-3.7 8H8.3l-3.7-8z"/><circle cx="12" cy="11.6" r="3"/>',
-    concrete: '<path d="M9.4 3h5.2v6.2H9.4z"/><path d="M12 9.2v3.6"/><path d="M8.8 12.8h6.4l-3.2 7.2z"/>',
-    cut: '<circle cx="12" cy="12" r="6.6"/><circle cx="12" cy="12" r="1.7"/><path d="M12 2.6v2.8M12 18.6v2.8M2.6 12h2.8M18.6 12h2.8M5.3 5.3l2 2M16.7 16.7l2 2M18.7 5.3l-2 2M7.3 16.7l-2 2"/>',
+    drill: '<path d="M3.5 7h9.5v6H3.5z"/><path d="M13 8.3h2.4l3.6-1.3v4.6l-3.6-1.3H13"/><path d="M6.6 13 5 19h3.6l1.3-6"/>',
+    wrench: '<path d="M8 5h8l4 7-4 7H8l-4-7z"/><circle cx="12" cy="12" r="3.1"/>',
+    concrete: '<rect x="9" y="3" width="6" height="7" rx="1.2"/><path d="M12 10v3.2"/><path d="M9.8 13.2h4.4L12 19z"/><path d="M5.5 20.5h3.5M15 20.5h3.5"/>',
+    cut: '<rect x="2.5" y="9.3" width="8.3" height="5.4" rx="1.8"/><circle cx="16" cy="12" r="5.6"/><circle cx="16" cy="12" r="1.5"/>',
     sand: '<rect x="4" y="6" width="16" height="12" rx="1.6"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
     measure: '<rect x="3" y="8" width="18" height="8" rx="1.4"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/>',
-    garden: '<path d="M11.5 21c0-6.3 3.6-10.8 9.2-11.3-.3 6.2-3.6 10.3-9.2 11.3z"/><path d="M11.5 21c-2-5.1-5.1-7.7-8.2-8.2 1 4.6 3.6 7.2 8.2 8.2z"/>',
+    garden: '<path d="M5 19c0-7.7 6.3-14 14-14 0 7.7-6.3 14-14 14z"/><path d="M5 19C9.5 14.3 13.5 10.3 17 8.4"/>',
     energy: '<path d="M13.2 2.5 5 13.6h5.6L9.2 21.5 19 10.2h-5.6z"/>'
   };
 

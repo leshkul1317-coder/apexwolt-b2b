@@ -139,6 +139,8 @@ const bindCardActions = () => {
 // ---- Быстрый просмотр товара (модалка): компактная карточка + детали по клику ----
 const pvOverlay = document.querySelector('[data-pv-overlay]');
 const pvBody = pvOverlay ? pvOverlay.querySelector('[data-pv-body]') : null;
+const isLocalHost = ['localhost', '127.0.0.1'].includes(location.hostname);
+const NOTIFY_ENDPOINT = window.APEXWOLT_NOTIFY_ENDPOINT || (isLocalHost ? 'http://localhost:8787/notify' : '/api/notify');
 
 const openQuickView = id => {
   const p = products.find(x => String(x.id) === String(id));
@@ -162,6 +164,11 @@ const openQuickView = id => {
       ${p.description ? `<p class="pv-desc">${escapeHtml(p.description)}</p>` : ''}
       ${(p.specs && p.specs.length) ? `<div class="pv-specs-wrap"><p class="pv-specs-title">Характеристики</p><ul class="pv-specs">${p.specs.map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul></div>` : ''}
       <div class="product-cta"><button type="button" data-add-product="${escapeHtml(p.name)}" data-add-code="${escapeHtml(p.code)}" data-add-brand="${escapeHtml(p.brand)}" data-add-mrc="${p.price ?? ''}" data-add-image="${escapeHtml(p.image)}">Добавить в заявку</button></div>
+      ${!p.stock ? `<div class="pv-notify" data-pv-notify>
+        <button type="button" class="pv-notify-trigger" data-pv-notify-trigger><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>Сообщить о поступлении</button>
+        <form class="pv-notify-form" data-pv-notify-form hidden><input type="email" name="email" inputmode="email" placeholder="Корпоративная почта" required aria-label="Email для уведомления" /><button type="submit">Подписаться</button></form>
+        <p class="pv-notify-msg" data-pv-notify-msg hidden></p>
+      </div>` : ''}
     </div>`;
   pvBody.querySelector('[data-add-product]')?.addEventListener('click', e => {
     const b = e.currentTarget;
@@ -171,6 +178,28 @@ const openQuickView = id => {
     showToast('Позиция добавлена в заявку');
   });
   pvBody.querySelectorAll('[data-auth-gate]').forEach(el => el.addEventListener('click', () => showToast('Коммерческие условия откроются после авторизации компании')));
+  // подписка «сообщить о поступлении» (для товаров «в пути»)
+  const notifyTrigger = pvBody.querySelector('[data-pv-notify-trigger]');
+  const notifyForm = pvBody.querySelector('[data-pv-notify-form]');
+  const notifyMsg = pvBody.querySelector('[data-pv-notify-msg]');
+  if (notifyTrigger && notifyForm) {
+    notifyTrigger.addEventListener('click', () => { notifyForm.hidden = false; notifyTrigger.hidden = true; notifyForm.querySelector('input')?.focus(); });
+    notifyForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = notifyForm.querySelector('input').value.trim();
+      const btn = notifyForm.querySelector('button');
+      const prev = btn.textContent; btn.disabled = true; btn.textContent = '…';
+      try {
+        const res = await fetch(NOTIFY_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, product: { name: p.name, code: p.code }, meta: { source: 'catalog' } }) });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          notifyForm.hidden = true;
+          notifyMsg.hidden = false; notifyMsg.className = 'pv-notify-msg is-ok';
+          notifyMsg.textContent = 'Готово — сообщим на почту, когда товар поступит.';
+        } else { btn.disabled = false; btn.textContent = prev; notifyMsg.hidden = false; notifyMsg.className = 'pv-notify-msg is-err'; notifyMsg.textContent = data.error || 'Не удалось подписаться. Попробуйте позже.'; }
+      } catch { btn.disabled = false; btn.textContent = prev; notifyMsg.hidden = false; notifyMsg.className = 'pv-notify-msg is-err'; notifyMsg.textContent = 'Сервер недоступен. Попробуйте позже.'; }
+    });
+  }
   window.dispatchEvent(new CustomEvent('catalog:rendered')); // привязать избранное/сравнение в модалке (collections.js, идемпотентно)
   pvBody.scrollTop = 0;
   pvOverlay.hidden = false;

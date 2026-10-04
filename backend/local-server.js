@@ -5,11 +5,14 @@
 
 const http = require('http');
 const { handler } = require('./handler');
+const { handler: notifyHandler } = require('./notify');
 
 const PORT = Number(process.env.PORT) || 8787;
 
 const server = http.createServer((req, res) => {
-  if (req.url !== '/request' && req.url !== '/') {
+  const path = (req.url || '').split('?')[0];
+  const route = path === '/notify' ? notifyHandler : (path === '/request' || path === '/') ? handler : null;
+  if (!route) {
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: false, error: 'Not found' }));
     return;
@@ -22,7 +25,7 @@ const server = http.createServer((req, res) => {
       headers: req.headers,
       body,
     };
-    const result = await handler(event);
+    const result = await route(event);
     res.writeHead(result.statusCode, result.headers || { 'Content-Type': 'application/json' });
     res.end(result.body);
   });

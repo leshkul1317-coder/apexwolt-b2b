@@ -1249,3 +1249,29 @@
   .pv-actions-top { top: 16px; right: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .pv-overlay, .pv-card { transition: none; } }
+
+/* Подписка «Сообщить о поступлении» в модалке товара */
+.pv-notify { margin-top: 12px; }
+.pv-notify-trigger {
+  display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center;
+  min-height: 44px; padding: 0 18px; border: 1px solid rgba(16, 17, 20, .16); border-radius: 12px;
+  background: #fff; color: #101114; font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.pv-notify-trigger svg { width: 16px; height: 16px; color: #d79a35; }
+.pv-notify-trigger:hover { border-color: #101114; background: rgba(16, 17, 20, .03); }
+.pv-notify-form { display: flex; gap: 8px; }
+.pv-notify-form input {
+  flex: 1; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid rgba(16, 17, 20, .16);
+  border-radius: 12px; font: inherit; font-size: 13px; background: #fff;
+}
+.pv-notify-form input:focus { outline: none; border-color: var(--accent-blue, #2f63ff); box-shadow: 0 0 0 3px rgba(47, 99, 255, .12); }
+.pv-notify-form button {
+  flex: none; height: 44px; padding: 0 18px; border: 0; border-radius: 12px;
+  background: #101114; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: background .2s ease;
+}
+.pv-notify-form button:hover { background: var(--accent-blue, #2f63ff); }
+.pv-notify-msg { margin: 10px 0 0; font-size: 12.5px; }
+.pv-notify-msg.is-ok { color: #2f8f58; }
+.pv-notify-msg.is-err { color: #d64545; }

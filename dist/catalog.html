@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=typography-v2" />
   <link rel="stylesheet" href="scroll-film.css?v=17" />
-  <link rel="stylesheet" href="catalog-page.css?v=13" />
+  <link rel="stylesheet" href="catalog-page.css?v=15" />
   <link rel="stylesheet" href="footer-legal.css?v=3" />
 </head>
 <body class="catalog-page">
@@ -26,7 +26,7 @@
       <aside class="category-sidebar" data-catalog-sidebar aria-label="Навигация по каталогу"></aside>
       <div class="category-results-main">
       <div class="catalog-tools glass-panel"><label class="search-field"><span>⌕</span><input type="search" data-product-search placeholder="Поиск по названию или артикулу" /></label><div class="tool-chips" aria-label="Быстрые B2B-фильтры"><button class="tool-chip is-active" type="button" data-availability="all">Все позиции</button><button class="tool-chip" type="button" data-availability="stock">В наличии</button><button class="tool-chip" type="button" data-availability="fast">Отгрузка 1–3 дня</button></div><div class="tool-chips brand-chips" data-brand-filter aria-label="Бренд" hidden></div><label class="sort-field">Сортировка <select data-product-sort><option value="relevant">Актуальные остатки</option><option value="lead">По сроку поставки</option><option value="price-low">Цена: по возрастанию</option><option value="price-high">Цена: по убыванию</option></select></label><div class="view-switcher" aria-label="Вид каталога"><button class="is-active" type="button" data-catalog-view="list" aria-label="Список">☰ <span>Список</span></button><button type="button" data-catalog-view="grid" aria-label="Плитка">▦ <span>Плитка</span></button></div></div>
-      <div class="category-results-head"><p><span data-results-count>0</span> позиций</p><button class="price-access-note" type="button" data-auth-gate><span>Персональные условия скрыты</span><b>Откроются после авторизации</b></button></div>
+      <div class="category-results-head"><p><span data-results-count>0</span> позиций</p><a class="list-order-link" href="zakaz-po-spisku.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Заказ по списку артикулов</a><button class="price-access-note" type="button" data-auth-gate><span>Персональные условия скрыты</span><b>Откроются после авторизации</b></button></div>
       <div class="products view-list" data-products></div>
       <p class="empty-state" data-empty-state hidden>По заданным условиям ничего не найдено.</p>
       </div>

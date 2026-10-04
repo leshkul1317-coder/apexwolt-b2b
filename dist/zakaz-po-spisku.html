@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Быстрый заказ по списку артикулов — соберите заявку из своего списка закупки за секунды. APEXWOLT B2B." />
+  <title>Заказ по списку — APEXWOLT</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=typography-v2" />
+  <link rel="stylesheet" href="scroll-film.css?v=17" />
+  <link rel="stylesheet" href="catalog-page.css?v=15" />
+  <link rel="stylesheet" href="footer-legal.css?v=3" />
+  <link rel="stylesheet" href="zakaz-po-spisku.css?v=1" />
+</head>
+<body class="catalog-page zk-page">
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="APEXWOLT — на главную"><img src="assets/apexwolt-logo-solid.svg" alt="APEXWOLT" /></a>
+    <nav class="nav-glass" aria-label="Основная навигация"><a href="index.html#catalog">Каталог</a><a href="index.html#platform">Платформа</a><a href="index.html#contacts">Контакты</a></nav>
+    <div class="header-actions"><button class="header-icon" type="button" data-collection-open="favorites" aria-label="Сохранённые позиции" data-tooltip="Сохранённые позиции"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span data-favorites-count hidden>0</span></button><button class="header-icon" type="button" data-collection-open="compare" aria-label="Сравнение товаров" data-tooltip="Сравнение товаров"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v16h4M16 4h4v16h-4M12 7v10M9.5 9.5 12 7l2.5 2.5M9.5 14.5 12 17l2.5-2.5"/></svg><span data-compare-count hidden>0</span></button><a class="header-icon" href="account.html" aria-label="Личный кабинет компании" data-tooltip="Личный кабинет"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></a><a class="cart-button" href="zayavka.html" aria-label="Заявка">Заявка <span data-cart-count>0</span></a></div>
+  </header>
+
+  <main class="zk">
+    <div class="zk-head">
+      <a class="zk-back" href="catalog.html"><span>←</span> В каталог</a>
+    </div>
+    <p class="eyebrow">БЫСТРАЯ ЗАКУПКА</p>
+    <h1 class="zk-title">Заказ по списку артикулов</h1>
+    <p class="zk-lead">Вставьте список артикулов из своей заявки или выгрузки 1С — и заявка соберётся автоматически. Удобно, когда позиций много: не нужно искать каждую в каталоге вручную.</p>
+
+    <section class="zk-panel">
+      <label class="zk-field-label" for="zk-input">Список артикулов</label>
+      <textarea id="zk-input" data-zk-input placeholder="7/14/04&#10;7/24/07 5&#10;7/14/10; 10"></textarea>
+      <p class="zk-hint">По одному артикулу в строке. Количество можно указать через пробел, точку с запятой или запятую: <code>7/24/07 5</code>, <code>7/24/07;5</code>. Без количества — 1 шт.</p>
+      <div class="zk-actions">
+        <button type="button" class="zk-btn-dark" data-zk-parse>Собрать заявку</button>
+        <button type="button" class="zk-btn-light zk-file">Загрузить .csv / .xlsx<input type="file" accept=".csv,.xlsx,.txt" data-zk-file /></button>
+        <span class="zk-actions-sep"></span>
+        <button type="button" class="zk-btn-light" data-zk-clear>Очистить</button>
+      </div>
+    </section>
+
+    <section class="zk-result" data-zk-result hidden>
+      <p class="zk-summary" data-zk-summary></p>
+      <div class="zk-rows" data-zk-matched></div>
+      <div class="zk-unknown" data-zk-unknown hidden></div>
+      <div class="zk-result-foot">
+        <button type="button" class="zk-btn-dark" data-zk-add disabled>Добавить в заявку</button>
+      </div>
+      <div class="zk-success" data-zk-success hidden></div>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+
+  <aside class="collection-drawer" data-collection-drawer aria-hidden="true"><button class="drawer-close" type="button" data-collection-close aria-label="Закрыть">×</button><p class="eyebrow" data-collection-eyebrow>СОХРАНЁННЫЕ ПОЗИЦИИ</p><h2 data-collection-title>Ваши списки</h2><div class="collection-items" data-collection-items></div></aside><div class="collection-backdrop" data-collection-close></div>
+  <div class="toast" data-toast role="status"></div>
+
+  <script src="catalog.data.js?v=1"></script>
+  <script src="zakaz-po-spisku.js?v=2"></script>
+  <script src="collections.js?v=6"></script>
+  <script src="footer.js?v=4"></script>
+</body>
+</html>

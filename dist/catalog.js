@@ -299,23 +299,39 @@ const buildBreadcrumbs = () => {
   host.innerHTML = parts.join('<i aria-hidden="true">›</i>');
 };
 
-// Боковое меню каталога: все направления; у текущего раскрыты категории.
+// Боковое меню каталога — живой аккордеон: клик по направлению раскрывает его
+// категории на месте (без перезагрузки), открыто одно направление за раз,
+// текущее раскрыто. Выбор категории/«Все товары» — обычная навигация.
+const chevronSvg = '<svg class="sidebar-chevron" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
 const buildSidebar = () => {
   const host = document.querySelector('[data-catalog-sidebar]');
   if (!host) return;
   const tree = Object.entries(sectionData).map(([skey, sec]) => {
     const isCur = skey === activeSection;
     const cats = sec.categories.filter(key => categoryData[key]);
-    let sub = '';
-    if (isCur && cats.length > 1) {
-      sub = '<ul class="sidebar-cats">' + cats.map(key =>
-        `<li><a href="catalog?category=${key}" class="${key === activeCategory ? 'is-active' : ''}"><span>${escapeHtml(categoryData[key].title)}</span><i>${categoryData[key].variants.length}</i></a></li>`
-      ).join('') + '</ul>';
+    // направление без подкатегорий (или с одной) — просто ссылка
+    if (cats.length <= 1) {
+      const href = cats.length === 1 ? `catalog?category=${cats[0]}` : `catalog?section=${skey}`;
+      const act = isCur ? ' is-active' : '';
+      return `<li class="sidebar-node is-leaf"><a class="sidebar-dir${act}" href="${href}"><span>${escapeHtml(sec.title)}</span></a></li>`;
     }
-    const dirActive = isCur && !activeCategory ? ' is-active' : '';
-    return `<li class="${isCur ? 'is-current' : ''}"><a class="sidebar-dir${dirActive}" href="catalog?section=${skey}">${escapeHtml(sec.title)}</a>${sub}</li>`;
+    const subItems = `<li><a class="sidebar-all${isCur && !activeCategory ? ' is-active' : ''}" href="catalog?section=${skey}"><span>Все товары направления</span></a></li>` +
+      cats.map(key => `<li><a href="catalog?category=${key}" class="${key === activeCategory ? 'is-active' : ''}"><span>${escapeHtml(categoryData[key].title)}</span><i>${categoryData[key].variants.length}</i></a></li>`).join('');
+    return `<li class="sidebar-node${isCur ? ' is-open' : ''}">
+      <button type="button" class="sidebar-dir${isCur ? ' is-current' : ''}" data-sidebar-toggle aria-expanded="${isCur ? 'true' : 'false'}"><span>${escapeHtml(sec.title)}</span>${chevronSvg}</button>
+      <div class="sidebar-sub"><div class="sidebar-sub-inner"><ul class="sidebar-cats">${subItems}</ul></div></div>
+    </li>`;
   }).join('');
   host.innerHTML = '<p class="sidebar-title">Каталог</p><ul class="sidebar-tree">' + tree + '</ul>';
+  host.querySelectorAll('[data-sidebar-toggle]').forEach(btn => btn.addEventListener('click', () => {
+    const li = btn.closest('.sidebar-node');
+    const willOpen = !li.classList.contains('is-open');
+    host.querySelectorAll('.sidebar-node.is-open').forEach(open => {
+      if (open !== li) { open.classList.remove('is-open'); open.querySelector('[data-sidebar-toggle]')?.setAttribute('aria-expanded', 'false'); }
+    });
+    li.classList.toggle('is-open', willOpen);
+    btn.setAttribute('aria-expanded', String(willOpen));
+  }));
 };
 
 buildSwitcher();

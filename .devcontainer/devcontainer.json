@@ -1,0 +1,13 @@
+{
+  "name": "APEXWOLT B2B",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "forwardPorts": [4173],
+  "portsAttributes": {
+    "4173": {
+      "label": "APEXWOLT local preview",
+      "onAutoForward": "openPreview",
+      "protocol": "http"
+    }
+  },
+  "postAttachCommand": "bash .devcontainer/start-preview.sh"
+}

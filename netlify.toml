@@ -1,0 +1,8 @@
+# Netlify: публикуем готовую статику из dist/, без шага сборки.
+# Continuous Deployment: привязать этот репозиторий к сайту в дашборде Netlify
+# (Site settings → Build & deploy → Link repository), production branch = work/apexwolt-ui.
+# После привязки каждый push в эту ветку автоматически деплоит сайт.
+
+[build]
+  publish = "dist"
+  command = ""

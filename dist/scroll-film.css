@@ -244,8 +244,7 @@ main { position: relative; z-index: 1; }
 .how-it-works,
 .contact,
 .b2b-tools,
-.supply-status,
-.account-section {
+.supply-status {
   background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
@@ -535,8 +534,7 @@ main { position: relative; z-index: 1; }
 #platform .procurement-card.is-blue.is-tiltable::after { background: radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.25),rgba(255,255,255,0) 45%); }
 
 .b2b-tools,
-.supply-status,
-.account-section {
+.supply-status {
   position: relative;
   z-index: 1;
   padding: clamp(92px,11vw,160px) clamp(22px,8vw,128px);
@@ -612,16 +610,6 @@ main { position: relative; z-index: 1; }
 .supply-list span { color: #5b5e64; font-size: 9px; text-align: right; }
 
 .supply-status { min-height: 125svh; display: flex; flex-direction: column; justify-content: center; }
-.account-section { min-height: 145svh; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(40px,10vw,160px); align-items: center; background: rgba(255,255,255,.7); }
-.account-copy h2 { margin: 15px 0 0; font-size: clamp(52px,5.2vw,88px); line-height: .88; letter-spacing: -.075em; }
-.account-copy>p:not(.eyebrow) { max-width: 390px; margin: 22px 0 28px; color: #60636a; font-size: 12px; line-height: 1.5; }
-.account-panel { padding: 22px; border-radius: 22px; }
-.account-panel-head { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid rgba(16,17,20,.08); color: #777a80; font-size: 9px; letter-spacing: .08em; }
-.account-panel-head i { color: var(--accent-blue); font-style: normal; }
-.account-roles { display: grid; gap: 8px; margin-top: 14px; }
-.account-roles article { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 15px; border-radius: 13px; background: rgba(255,255,255,.76); }
-.account-roles b { font-size: 14px; }.account-roles small { color: #777a80; font-size: 9px; }.account-roles span { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: var(--accent-blue); font-size: 9px; }
-
 .request-drawer.is-checkout > :not(.checkout-success):not(.drawer-close) { display: none; }
 .checkout-success { padding-top: 32px; }
 .checkout-film { overflow: hidden; margin: 20px -12px 24px; border-radius: 16px; background: #f2f3f4; }
@@ -631,8 +619,7 @@ main { position: relative; z-index: 1; }
 .catalog,
 .how-it-works,
 .b2b-tools,
-.supply-status,
-.account-section {
+.supply-status {
   background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
@@ -660,7 +647,7 @@ main { position: relative; z-index: 1; }
   .section-title-lockup::before,.section-title-lockup::after { left: 20px; }
   #platform .section-copy-glass { display: block; }
   #platform .section-copy-glass>p { margin-top: 20px; }
-  .procurement-grid,.account-section { grid-template-columns: 1fr; }
+  .procurement-grid { grid-template-columns: 1fr; }
   .procurement-card { min-height: 220px; }
   .supply-layout { grid-template-columns: 1fr; }
   .supply-summary { min-height: 220px; }

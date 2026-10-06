@@ -4,7 +4,7 @@
 .zayavka-page { background: #fff; }
 .zayavka-page .site-header { background: rgba(255, 255, 255, .82); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, .7); border-radius: 20px; padding: 9px 16px; box-shadow: 0 14px 36px rgba(22, 25, 31, .09), inset 0 1px 0 #fff; }
 
-.zv { max-width: 1180px; margin: 0 auto; padding: 104px clamp(20px, 6vw, 72px) 120px; }
+.zv { max-width: 1180px; margin: 0 auto; padding: 124px clamp(20px, 6vw, 72px) 120px; }
 
 /* Шапка страницы: назад + шаги */
 .zv-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
@@ -133,7 +133,7 @@
   .zv-reco-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 680px) {
-  .zv { padding-top: 92px; }
+  .zv { padding-top: 112px; }
   .zv-item { grid-template-columns: 16px 56px minmax(0, 1fr) auto; grid-template-areas: "num thumb info remove" "num thumb qty price"; gap: 10px 14px; row-gap: 12px; }
   .zv-num { grid-area: num; } .zv-thumb { grid-area: thumb; width: 56px; height: 56px; } .zv-item-info { grid-area: info; } .zv-remove { grid-area: remove; justify-self: end; }
   .zv-qty { grid-area: qty; } .zv-price { grid-area: price; justify-self: end; align-self: center; }

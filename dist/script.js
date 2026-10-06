@@ -427,7 +427,7 @@ if (workflow && 'IntersectionObserver' in window && !window.matchMedia('(prefers
   workflowObserver.observe(workflow);
 }
 
-const tiltCards = [...document.querySelectorAll('#platform .procurement-card, .partner-benefit')];
+const tiltCards = [...document.querySelectorAll('#new-arrivals .catalog-new-card, #platform .procurement-card, .partner-benefit')];
 const tiltAllowed = window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (tiltAllowed) {

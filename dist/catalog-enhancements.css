@@ -1,14 +1,14 @@
 .hero {
-  min-height: clamp(620px, 72svh, 720px);
+  min-height: clamp(440px, 54svh, 560px);
 }
 
 .hero .hero-copy {
   width: min(390px, 37vw);
-  padding-top: clamp(195px, 23vh, 260px);
+  padding-top: clamp(118px, 14vh, 158px);
 }
 
 .hero .hero-copy h1 {
-  font-size: clamp(44px, 4vw, 64px);
+  font-size: clamp(40px, 3.6vw, 58px);
 }
 
 .catalog {

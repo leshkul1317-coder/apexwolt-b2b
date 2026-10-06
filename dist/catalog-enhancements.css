@@ -1,18 +1,30 @@
 .hero {
-  min-height: clamp(330px, 42svh, 440px);
+  min-height: clamp(620px, 78svh, 720px);
 }
 
-.hero .hero-copy {
-  width: min(390px, 37vw);
-  padding-top: clamp(96px, 10vh, 122px);
-}
-
-.hero .hero-copy h1 {
-  font-size: clamp(40px, 3.6vw, 58px);
+.hero-new-arrivals {
+  position: absolute;
+  z-index: 4;
+  left: clamp(22px, 6vw, 96px);
+  top: clamp(128px, 16vh, 166px);
+  width: min(600px, 47vw);
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .86);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .82), rgba(242, 246, 252, .58)),
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, .98), transparent 46%);
+  box-shadow:
+    0 30px 80px rgba(21, 29, 43, .12),
+    0 0 50px rgba(47, 99, 255, .05),
+    inset 0 1px 0 rgba(255, 255, 255, .98);
+  -webkit-backdrop-filter: blur(30px) saturate(132%);
+  backdrop-filter: blur(30px) saturate(132%);
 }
 
 .catalog {
-  padding-top: clamp(28px, 4vw, 56px);
+  padding-top: clamp(54px, 7vw, 92px);
 }
 
 .category-search {
@@ -99,8 +111,8 @@
   display: none;
 }
 
-/* Новинки остаются внутри #catalog: кадр фонового ролика не меняется,
-   а пользователь видит новые модели сразу при входе в каталог. */
+/* Новинки встроены в приветственный экран: товары доступны сразу,
+   но не перекрывают основной визуал со скролл-анимацией. */
 .catalog-new {
   margin: 0 0 clamp(28px, 3vw, 44px);
 }
@@ -212,6 +224,76 @@
   font-size: 15px;
   font-weight: 720;
   letter-spacing: -.035em;
+}
+
+.hero-new-arrivals.catalog-new {
+  min-width: 0;
+  margin: 0;
+}
+
+.hero-new-arrivals .catalog-new-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.hero-new-arrivals .catalog-new-card {
+  min-height: 190px;
+  padding: 11px;
+  border-color: rgba(255, 255, 255, .96);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(246, 248, 252, .68));
+  box-shadow: 0 14px 34px rgba(22, 29, 42, .065), inset 0 1px 0 #fff;
+}
+
+.hero-new-arrivals .catalog-new-art {
+  min-height: 92px;
+  margin: -1px -1px 10px;
+  border-radius: 14px;
+}
+
+.hero-new-arrivals .catalog-new-art img {
+  height: 86px;
+}
+
+.hero-new-arrivals .catalog-new-badge {
+  top: 10px;
+  left: 10px;
+  padding: 7px 9px;
+  font-size: 8px;
+}
+
+.hero-new-arrivals .catalog-new-brand {
+  color: #858a93;
+  font-size: 8px;
+  letter-spacing: .13em;
+}
+
+.hero-new-arrivals .catalog-new-card > strong {
+  margin: 6px 0 12px;
+  font-size: 14px;
+}
+
+.hero-new-arrivals .catalog-new-meta {
+  padding-top: 9px;
+}
+
+.hero-new-arrivals .catalog-new-meta i {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-new-arrivals .catalog-new-meta i::before {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #32a85a;
+  box-shadow: 0 0 0 3px rgba(50, 168, 90, .1);
+  content: "";
+}
+
+.hero-new-arrivals .catalog-new-meta b {
+  font-size: 12px;
 }
 
 .brand-supply-grid {
@@ -351,11 +433,23 @@
 }
 
 @media (max-width: 1100px) {
+  .hero {
+    min-height: 680px;
+  }
+
+  .hero-new-arrivals {
+    width: min(530px, 52vw);
+  }
+
   .category-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .catalog-new-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-new-arrivals .catalog-new-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -367,12 +461,18 @@
 
 @media (max-width: 800px) {
   .hero {
-    min-height: 410px;
+    min-height: 700px;
   }
 
-  .hero .hero-copy {
+  .hero-new-arrivals {
+    top: auto;
+    right: 14px;
+    bottom: 16px;
+    left: 14px;
     width: auto;
-    padding-top: 176px;
+    display: block;
+    padding: 10px;
+    border-radius: 24px;
   }
 
   .category-search {
@@ -413,6 +513,30 @@
     scroll-snap-align: start;
   }
 
+  .hero-new-arrivals .catalog-new-grid {
+    display: flex;
+    gap: 9px;
+    margin-right: -10px;
+    padding-right: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .hero-new-arrivals .catalog-new-card {
+    width: min(68vw, 250px);
+    min-width: min(68vw, 250px);
+    min-height: 270px;
+  }
+
+  .hero-new-arrivals .catalog-new-art {
+    min-height: 145px;
+  }
+
+  .hero-new-arrivals .catalog-new-art img {
+    height: 134px;
+  }
+
   .brand-supply-grid {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -450,6 +574,11 @@
   .catalog-new-card {
     width: 82vw;
     min-width: 82vw;
+  }
+
+  .hero-new-arrivals .catalog-new-card {
+    width: min(74vw, 270px);
+    min-width: min(74vw, 270px);
   }
 }
 

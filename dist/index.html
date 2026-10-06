@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=typography-v3" />
   <link rel="stylesheet" href="scroll-film.css?v=22" />
-  <link rel="stylesheet" href="catalog-enhancements.css?v=21" />
+  <link rel="stylesheet" href="catalog-enhancements.css?v=24" />
   <link rel="stylesheet" href="footer-legal.css?v=3" />
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css" />
 </head>
@@ -29,46 +29,43 @@
   </header>
 
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy"><p class="eyebrow">APEXWOLT / B2B-ПЛАТФОРМА</p><h1 id="hero-title">Инструмент<br />для <em>дела.</em></h1><p>Каталог, актуальные остатки и заявки на закупку — в одном прозрачном процессе.</p><div class="hero-actions"><a class="button button-blue" href="#catalog">Открыть каталог <span>→</span></a><a class="button button-glass" href="#partner-support">Поддержка партнёров</a></div></div>
-    </section>
-
-    <section class="catalog" id="catalog" aria-label="Каталог APEXWOLT">
-      <label class="category-search glass-panel"><span aria-hidden="true">⌕</span><input type="search" data-category-search placeholder="Найти категорию или товар" autocomplete="off" /></label>
-
-      <section class="catalog-new" id="new-arrivals" aria-label="Новинки сварочной линейки">
-        <div class="catalog-new-grid">
+    <section class="hero" aria-label="Каталог и новинки APEXWOLT">
+        <section class="hero-new-arrivals catalog-new glass-panel" id="new-arrivals" aria-label="Новинки сварочной линейки">
+          <div class="catalog-new-grid">
           <a class="catalog-new-card" href="catalog?category=svarochnye-apparaty" aria-label="Открыть APEXWOLT MMA-190 Compact в каталоге">
             <span class="catalog-new-badge">Новинка</span>
-            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-01.png" alt="Сварочный аппарат APEXWOLT MMA-190 Compact" loading="lazy" /></span>
-            <span class="catalog-new-brand">APEXWOLT · 7/65/01</span>
+            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-01.png" alt="Сварочный аппарат APEXWOLT MMA-190 Compact" loading="eager" decoding="async" /></span>
+            <span class="catalog-new-brand">APEXWOLT</span>
             <strong>MMA-190 Compact</strong>
             <span class="catalog-new-meta"><i>В наличии</i><b>6 490 ₽</b></span>
           </a>
           <a class="catalog-new-card" href="catalog?category=svarochnye-apparaty" aria-label="Открыть APEXWOLT MMA-200 в каталоге">
             <span class="catalog-new-badge">Новинка</span>
-            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-02.png" alt="Сварочный аппарат APEXWOLT MMA-200" loading="lazy" /></span>
-            <span class="catalog-new-brand">APEXWOLT · 7/65/02</span>
+            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-02.png" alt="Сварочный аппарат APEXWOLT MMA-200" loading="eager" decoding="async" /></span>
+            <span class="catalog-new-brand">APEXWOLT</span>
             <strong>MMA-200</strong>
             <span class="catalog-new-meta"><i>В наличии</i><b>8 090 ₽</b></span>
           </a>
           <a class="catalog-new-card" href="catalog?category=svarochnye-apparaty" aria-label="Открыть APEXWOLT MMA-220 PRO в каталоге">
             <span class="catalog-new-badge">Новинка</span>
-            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-03.png" alt="Сварочный аппарат APEXWOLT MMA-220 PRO" loading="lazy" /></span>
-            <span class="catalog-new-brand">APEXWOLT · 7/65/03</span>
+            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-03.png" alt="Сварочный аппарат APEXWOLT MMA-220 PRO" loading="eager" decoding="async" /></span>
+            <span class="catalog-new-brand">APEXWOLT</span>
             <strong>MMA-220 PRO</strong>
             <span class="catalog-new-meta"><i>В наличии</i><b>8 790 ₽</b></span>
           </a>
           <a class="catalog-new-card" href="catalog?category=svarochnye-apparaty" aria-label="Открыть APEXWOLT MMA-250 PRO в каталоге">
             <span class="catalog-new-badge">Новинка</span>
-            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-04.png" alt="Сварочный аппарат APEXWOLT MMA-250 PRO" loading="lazy" /></span>
-            <span class="catalog-new-brand">APEXWOLT · 7/65/04</span>
+            <span class="catalog-new-art"><img src="assets/catalog/apexwolt-7-65-04.png" alt="Сварочный аппарат APEXWOLT MMA-250 PRO" loading="eager" decoding="async" /></span>
+            <span class="catalog-new-brand">APEXWOLT</span>
             <strong>MMA-250 PRO</strong>
             <span class="catalog-new-meta"><i>В наличии</i><b>12 290 ₽</b></span>
           </a>
-        </div>
-      </section>
+          </div>
+        </section>
+    </section>
 
+    <section class="catalog" id="catalog" aria-label="Каталог APEXWOLT">
+      <label class="category-search glass-panel" id="hero-catalog-search"><span aria-hidden="true">⌕</span><input type="search" data-category-search placeholder="Найти категорию или товар" autocomplete="off" /></label>
       <div class="category-grid" id="catalog-directions" data-category-grid>
         <div class="category-card has-flyout" data-section="akkumulyatornyy-instrument"><span class="category-number">01</span><span class="category-visual" style="background-image:url('assets/catalog-drill-cutout.png')"></span><span class="category-name">Аккумуляторный инструмент</span><span class="category-meta">13 категорий · 40 позиций</span><span class="sr-only">дрели-шуруповерты аккумуляторные винтоверты аккумуляторные гайковерты аккумуляторные перфораторы аккумуляторные углошлифовальные машины аккумуляторные пилы сабельные аккумуляторные лобзики аккумуляторные реноваторы аккумуляторные гвоздезабиватели аккумуляторные пылесосы аккумуляторные реноваторы (многофункциональный инструмент) шуруповерты многофункциональные аккумуляторные краскопульты аккумуляторные</span><button class="category-arrow cc-toggle" type="button" aria-expanded="false" aria-label="Показать категории направления «Аккумуляторный инструмент»">→</button><a class="cc-coverlink" href="catalog?section=akkumulyatornyy-instrument" aria-label="Аккумуляторный инструмент — открыть направление"></a><div class="cc-flyout" role="group" aria-label="Аккумуляторный инструмент — категории"><a class="cc-sub cc-sub-all" href="catalog?section=akkumulyatornyy-instrument"><span class="cc-sub-label">Все позиции направления</span><span class="cc-sub-count">40</span></a><a class="cc-sub" data-img="assets/catalog-drill-cutout.png" href="catalog?category=dreli-shurupoverty-akkumulyatornye"><span class="cc-sub-label">Дрели-шуруповерты аккумуляторные</span><span class="cc-sub-count">10</span></a><a class="cc-sub" href="catalog?category=vintoverty-akkumulyatornye"><span class="cc-sub-label">Винтоверты аккумуляторные</span><span class="cc-sub-count">2</span></a><a class="cc-sub" data-img="assets/category-impact-wrench-cutout-v2.png" href="catalog?category=gaykoverty-akkumulyatornye"><span class="cc-sub-label">Гайковерты аккумуляторные</span><span class="cc-sub-count">9</span></a><a class="cc-sub" data-img="assets/category-rotary-hammer-cutout-v2.png" href="catalog?category=perforatory-akkumulyatornye"><span class="cc-sub-label">Перфораторы аккумуляторные</span><span class="cc-sub-count">4</span></a><a class="cc-sub" data-img="assets/catalog-grinder-cutout.png" href="catalog?category=ugloshlifovalnye-mashiny-akkumulyatornye"><span class="cc-sub-label">Углошлифовальные машины аккумуляторные</span><span class="cc-sub-count">3</span></a><a class="cc-sub" href="catalog?category=pily-sabelnye-akkumulyatornye"><span class="cc-sub-label">Пилы сабельные аккумуляторные</span><span class="cc-sub-count">2</span></a><a class="cc-sub" data-img="assets/catalog-jigsaw-cutout.png" href="catalog?category=lobziki-akkumulyatornye"><span class="cc-sub-label">Лобзики аккумуляторные</span><span class="cc-sub-count">2</span></a><a class="cc-sub" href="catalog?category=renovatory-akkumulyatornye"><span class="cc-sub-label">Реноваторы аккумуляторные</span><span class="cc-sub-count">2</span></a><a class="cc-sub" href="catalog?category=gvozdezabivateli-akkumulyatornye"><span class="cc-sub-label">Гвоздезабиватели аккумуляторные</span><span class="cc-sub-count">2</span></a><a class="cc-sub" href="catalog?category=pylesosy-akkumulyatornye"><span class="cc-sub-label">Пылесосы аккумуляторные</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=renovatory-mnogofunkcionalnyy-instrument"><span class="cc-sub-label">Реноваторы (многофункциональный инструмент)</span><span class="cc-sub-count">1</span></a><a class="cc-sub" data-img="assets/catalog/sumo-bf-mu1646.png" href="catalog?category=shurupoverty-mnogofunkcionalnye-akkumulyatornye"><span class="cc-sub-label">Шуруповерты многофункциональные аккумуляторные</span><span class="cc-sub-count">1</span></a><a class="cc-sub" data-img="assets/catalog/sumo-bf-sg1500.png" href="catalog?category=kraskopulty-akkumulyatornye"><span class="cc-sub-label">Краскопульты аккумуляторные</span><span class="cc-sub-count">1</span></a></div></div>
         <div class="category-card has-flyout" data-section="setevoy-elektroinstrument"><span class="category-number">02</span><span class="category-visual" style="background-image:url('assets/catalog-grinder-cutout.png')"></span><span class="category-name">Сетевой электроинструмент</span><span class="category-meta">15 категорий · 23 позиции</span><span class="sr-only">углошлифовальные машины сетевые перфораторы сетевые отбойные молотки пилы дисковые сетевые лобзики сетевые фрезеры граверы шлифовальные машины эксцентриковые шлифовальные машины ленточные шлифовальные машины для стен фены строительные клеевые пистолеты дрели электрические фрезеры кромочные рубанки электрические</span><button class="category-arrow cc-toggle" type="button" aria-expanded="false" aria-label="Показать категории направления «Сетевой электроинструмент»">→</button><a class="cc-coverlink" href="catalog?section=setevoy-elektroinstrument" aria-label="Сетевой электроинструмент — открыть направление"></a><div class="cc-flyout" role="group" aria-label="Сетевой электроинструмент — категории"><a class="cc-sub cc-sub-all" href="catalog?section=setevoy-elektroinstrument"><span class="cc-sub-label">Все позиции направления</span><span class="cc-sub-count">23</span></a><a class="cc-sub" data-img="assets/catalog-grinder-cutout.png" href="catalog?category=ugloshlifovalnye-mashiny-setevye"><span class="cc-sub-label">Углошлифовальные машины сетевые</span><span class="cc-sub-count">4</span></a><a class="cc-sub" data-img="assets/category-rotary-hammer-cutout-v2.png" href="catalog?category=perforatory-setevye"><span class="cc-sub-label">Перфораторы сетевые</span><span class="cc-sub-count">3</span></a><a class="cc-sub" href="catalog?category=otboynye-molotki"><span class="cc-sub-label">Отбойные молотки</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=pily-diskovye-setevye"><span class="cc-sub-label">Пилы дисковые сетевые</span><span class="cc-sub-count">1</span></a><a class="cc-sub" data-img="assets/catalog-jigsaw-cutout.png" href="catalog?category=lobziki-setevye"><span class="cc-sub-label">Лобзики сетевые</span><span class="cc-sub-count">2</span></a><a class="cc-sub" href="catalog?category=frezery"><span class="cc-sub-label">Фрезеры</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=gravery"><span class="cc-sub-label">Граверы</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=shlifovalnye-mashiny-ekscentrikovye"><span class="cc-sub-label">Шлифовальные машины эксцентриковые</span><span class="cc-sub-count">2</span></a><a class="cc-sub" href="catalog?category=shlifovalnye-mashiny-lentochnye"><span class="cc-sub-label">Шлифовальные машины ленточные</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=shlifovalnye-mashiny-dlya-sten"><span class="cc-sub-label">Шлифовальные машины для стен</span><span class="cc-sub-count">1</span></a><a class="cc-sub" data-img="assets/category-heat-gun-cutout-v2.png" href="catalog?category=feny-stroitelnye"><span class="cc-sub-label">Фены строительные</span><span class="cc-sub-count">2</span></a><a class="cc-sub" href="catalog?category=kleevye-pistolety"><span class="cc-sub-label">Клеевые пистолеты</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=dreli-elektricheskie"><span class="cc-sub-label">Дрели электрические</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=frezery-kromochnye"><span class="cc-sub-label">Фрезеры кромочные</span><span class="cc-sub-count">1</span></a><a class="cc-sub" href="catalog?category=rubanki-elektricheskie"><span class="cc-sub-label">Рубанки электрические</span><span class="cc-sub-count">1</span></a></div></div>
@@ -161,7 +158,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
   <aside class="collection-drawer" data-collection-drawer aria-hidden="true"><button class="drawer-close" type="button" data-collection-close aria-label="Закрыть">×</button><p class="eyebrow" data-collection-eyebrow>СОХРАНЁННЫЕ ПОЗИЦИИ</p><h2 data-collection-title>Ваши списки</h2><div class="collection-items" data-collection-items></div></aside><div class="collection-backdrop" data-collection-close></div>
-  <script src="script.js?v=cinematic-scroll-v26"></script>
+  <script src="script.js?v=cinematic-scroll-v27"></script>
   <script src="collections.js?v=6"></script>
   <script src="footer.js?v=8"></script>
   <script src="nav-menu.js?v=3" defer></script>

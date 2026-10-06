@@ -282,8 +282,10 @@ let availability = 'all';
 const filterCategories = () => {
   if (!categoryGrid || !categorySearch) return;
   const query = categorySearch.value.trim().toLowerCase();
+  const aliases = query === 'ушм' || query === 'болгарка' ? ['углошлифоваль'] : [];
   categoryGrid.querySelectorAll('.category-card').forEach(card => {
-    card.hidden = Boolean(query) && !card.textContent.toLowerCase().includes(query);
+    const content = card.textContent.toLowerCase();
+    card.hidden = Boolean(query) && !content.includes(query) && !aliases.some(alias => content.includes(alias));
   });
 };
 
